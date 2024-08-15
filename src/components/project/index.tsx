@@ -1,6 +1,6 @@
 // src/components/Projects.tsx
 import React from "react";
-import { Box, Typography, Paper, Tooltip, Button, Divider } from "@mui/material";
+import { Box, Typography, Paper, Tooltip, Button } from "@mui/material";
 import { projects } from "../../data/contents.ts";
 import useBreakpoint from "../../assets/breakpoints/index.tsx";
 

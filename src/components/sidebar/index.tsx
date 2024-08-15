@@ -34,12 +34,9 @@ const Sidebar: React.FC<SidebarProps> = ({
   return (
     <Paper elevation={3} sx={{ padding: 3, textAlign: "center" }}>
       <Box
-        // style={{
-        //   position: "fixed",
-        //   height: "100%",
-        // }}
         display="flex"
-        flexDirection={desktopView ? "column" : "row"}
+        flexDirection="column"
+        // flexDirection={desktopView ? "column" : "row"}
         justifyContent="space-between"
       >
         <Box display="flex" justifyContent="space-between">
@@ -66,52 +63,54 @@ const Sidebar: React.FC<SidebarProps> = ({
               </Typography>
             </Box>
           </Box>
-          <DarkLight checked={checkedCall} onChange={onChangeCall} />
+            <DarkLight checked={checkedCall} onChange={onChangeCall} />
         </Box>
         {!desktopView && (
-          <Button onClick={() => setExpand(!expand)}>
-            {expand ? (
-              <svg
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <g clip-path="url(#clip0_44_96761)">
-                  <path
-                    d="M12 10.828L7.04999 15.778L5.63599 14.364L12 8L18.364 14.364L16.95 15.778L12 10.828Z"
-                    fill="#8c8c8c"
-                  />
-                </g>
-                <defs>
-                  <clipPath id="clip0_44_96761">
-                    <rect width="24" height="24" fill="white" />
-                  </clipPath>
-                </defs>
-              </svg>
-            ) : (
-              <svg
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <g clip-path="url(#clip0_44_96469)">
-                  <path
-                    d="M12 13.172L16.95 8.22205L18.364 9.63605L12 16L5.63599 9.63605L7.04999 8.22205L12 13.172Z"
-                    fill="#8c8c8c"
-                  />
-                </g>
-                <defs>
-                  <clipPath id="clip0_44_96469">
-                    <rect width="24" height="24" fill="white" />
-                  </clipPath>
-                </defs>
-              </svg>
-            )}
-          </Button>
+          <Box>
+            <Button onClick={() => setExpand(!expand)} variant="text">
+              {expand ? (
+                <svg
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <g clip-path="url(#clip0_44_96761)">
+                    <path
+                      d="M12 10.828L7.04999 15.778L5.63599 14.364L12 8L18.364 14.364L16.95 15.778L12 10.828Z"
+                      fill="#8c8c8c"
+                    />
+                  </g>
+                  <defs>
+                    <clipPath id="clip0_44_96761">
+                      <rect width="24" height="24" fill="white" />
+                    </clipPath>
+                  </defs>
+                </svg>
+              ) : (
+                <svg
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <g clip-path="url(#clip0_44_96469)">
+                    <path
+                      d="M12 13.172L16.95 8.22205L18.364 9.63605L12 16L5.63599 9.63605L7.04999 8.22205L12 13.172Z"
+                      fill="#8c8c8c"
+                    />
+                  </g>
+                  <defs>
+                    <clipPath id="clip0_44_96469">
+                      <rect width="24" height="24" fill="white" />
+                    </clipPath>
+                  </defs>
+                </svg>
+              )}
+            </Button>
+          </Box>
         )}
       </Box>
       {desktopView && (
