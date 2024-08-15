@@ -34,6 +34,10 @@ const Sidebar: React.FC<SidebarProps> = ({
   return (
     <Paper elevation={3} sx={{ padding: 3, textAlign: "center" }}>
       <Box
+        // style={{
+        //   position: "fixed",
+        //   height: "100%",
+        // }}
         display="flex"
         flexDirection={desktopView ? "column" : "row"}
         justifyContent="space-between"
@@ -130,7 +134,7 @@ const Sidebar: React.FC<SidebarProps> = ({
       )}
       {(desktopView || expand) && (
         <>
-          <List sx={{ mt: 3 }}>
+          <List>
             <ListItem>
               <ListItemIcon>
                 <EmailIcon />

@@ -427,7 +427,7 @@ const BioSection: React.FC = () => {
                   <Box
                     gap={2}
                     display="flex"
-                    justifyContent="center"
+                    justifyContent="space-around"
                     alignItems="center"
                   >
                     {e.img}

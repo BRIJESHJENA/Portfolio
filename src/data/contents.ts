@@ -124,7 +124,7 @@ export const education = [
     img: "https://www.schoolmykids.com/smk-media/2017/07/kvslogo1.jpg",
     school: "Kendriya Vidyalaya Command Hospital, Kolkata",
     date: "Apr 2013 - Apr 2014",
-    degree: "ICSC(X), Science with Computer",
+    degree: "Matriculation",
   },
 ];
 

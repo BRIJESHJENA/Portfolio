@@ -33,17 +33,25 @@ const App: React.FC = () => {
       <Box
         display="flex"
         flexDirection={desktopView ? "row" : "column"}
-        margin={desktopView ? "2.5rem 10rem" : "2rem"}
+        // margin={desktopView ? "2.5rem 10rem" : "2rem"}
+        margin={desktopView ? "0" : "0 2rem"}
+        padding={desktopView ? "0" : "2rem 0"}
+        style={{
+          position: "fixed",
+          height: "100vh",
+        }}
       >
         <Sidebar checkedCall={isDarkMode} onChangeCall={handleThemeChange} />
         <Box
           className="main"
           component="main"
           sx={{
-            padding: desktopView ? "0 24px" : "24px 0 0 0",
+            padding: desktopView ? "24px" : "24px 0 0 0",
             overflowY: "scroll",
-            height: "80%",
-            maxHeight: desktopView ? "90vh" : mobileView ? "76vh" : "65vh",
+            height: "100vh",
+            maxHeight: desktopView ? "100vh" : "auto",
+
+            // maxHeight: desktopView ? "90vh" : mobileView ? "76vh" : "65vh",
           }}
         >
           <Box>

@@ -1,9 +1,12 @@
 // src/components/Projects.tsx
 import React from "react";
-import { Box, Typography, Paper, Tooltip, Button } from "@mui/material";
+import { Box, Typography, Paper, Tooltip, Button, Divider } from "@mui/material";
 import { projects } from "../../data/contents.ts";
+import useBreakpoint from "../../assets/breakpoints/index.tsx";
 
 const ProjectsSection: React.FC = () => {
+  const [, , desktopView] = useBreakpoint();
+
   return (
     <Box mb={4}>
       <Typography variant="h4">Projects</Typography>
@@ -14,11 +17,16 @@ const ProjectsSection: React.FC = () => {
           sx={{ padding: 2, marginBottom: 2 }}
         >
           <Typography variant="h6">{project.title}</Typography>
-          <Box display="flex">
+          <Box display="flex" flexDirection={desktopView ? "row" : "column"}>
             <img
               src={project.image}
               alt={project.title}
-              style={{ width: "20%", height: "auto", paddingRight: "10px" }}
+              style={{
+                width: desktopView ? "20%" : "100%",
+                height: "auto",
+                paddingRight: "10px",
+                margin:"10px"
+              }}
             />
             <Typography>{project.description}</Typography>
           </Box>
