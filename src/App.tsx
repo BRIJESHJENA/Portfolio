@@ -33,7 +33,6 @@ const App: React.FC = () => {
       <Box
         display="flex"
         flexDirection={desktopView ? "row" : "column"}
-        // margin={desktopView ? "2.5rem 10rem" : "2rem"}
         margin={desktopView ? "0" : "0 2rem"}
         padding={desktopView ? "0" : "2rem 0"}
         style={{
@@ -50,8 +49,6 @@ const App: React.FC = () => {
             overflowY: "scroll",
             height: "100vh",
             maxHeight: desktopView ? "100vh" : "auto",
-
-            // maxHeight: desktopView ? "90vh" : mobileView ? "76vh" : "65vh",
           }}
         >
           <Box>

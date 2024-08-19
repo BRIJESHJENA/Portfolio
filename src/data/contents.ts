@@ -1,4 +1,4 @@
-import pro1 from "../assets/images/wheatherimg.png";
+import pro1 from "../assets/images/weatherReact.png";
 import pro2 from "../assets/images/foodSampatti.png";
 
 export const Bio = {
@@ -133,12 +133,12 @@ export const projects = [
     id: 0,
     title: "Weather App",
     description:
-      "Website that provides weather information for any location you choose, using HTML, CSS and JavaScript, weather API have been collected from a website named 'OpenWeatherMap'.",
+      "Website that provides weather information for any location you choose, using HTML, CSS, React, TypeScript, Redux, Javascript weather API have been collected from a website named 'OpenWeatherMap'.",
     image: pro1,
-    tags: ["HTML", "CSS", "Javascript"],
+    tags: ["HTML", "CSS", "React", "TypeScript", "Redux", "Javascript"],
     category: "web app",
-    github: "https://github.com/BRIJESHJENA/Weather-App",
-    webapp: "https://brijeshjena.github.io/Weather-App/",
+    github: "https://github.com/BRIJESHJENA/React-Weather-Web",
+    webapp: "https://brijeshjena.github.io/React-Weather-Web/",
   },
   {
     id: 0,
