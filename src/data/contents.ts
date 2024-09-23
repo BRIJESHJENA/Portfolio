@@ -63,6 +63,11 @@ export const skills = [
         image:
           "https://media.dev.to/cdn-cgi/image/width=1080,height=1080,fit=cover,gravity=auto,format=auto/https%3A%2F%2Fdev-to-uploads.s3.amazonaws.com%2Fuploads%2Farticles%2Fam39icfave7sg54aynkp.png",
       },
+      {
+        name: "React Testing Library",
+        image:
+          "https://www.npmjs.com/npm-avatar/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdmF0YXJVUkwiOiJodHRwczovL3MuZ3JhdmF0YXIuY29tL2F2YXRhci8yZjJlZGE1Zjk5MDg4ZjlhMmJkM2M3ZDY1Nzc1ZjMyMz9zaXplPTQ5NiZkZWZhdWx0PXJldHJvIn0.GK_iK0AfcN-AIa-cw34YqonuoTowfc-ZngV-e_00PGY",
+      },
     ],
   },
   {

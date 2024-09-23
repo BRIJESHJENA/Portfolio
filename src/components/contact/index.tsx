@@ -50,6 +50,7 @@ export const Contact = () => {
             </Grid>
             <Grid item xs={12}>
               <TextField
+                type="email"
                 label="Message"
                 variant="outlined"
                 fullWidth
@@ -65,10 +66,22 @@ export const Contact = () => {
             <Button
               type="submit"
               variant="contained"
-              style={{ backgroundColor: "greenyellow" }}
-              disabled={name === "" || message === "" || email === ""}
+              style={{
+                backgroundColor: "greenyellow",
+              }}
+              disabled={
+                name.length < 3 || message.length < 10 || email.length < 5
+              }
             >
-              <Typography display="flex">
+              <Typography
+                display="flex"
+                style={{
+                  color:
+                    name.length < 3 || message.length < 10 || email.length < 5
+                      ? "#8c8c8c"
+                      : "#000000",
+                }}
+              >
                 Send Message
                 <svg
                   width="24"
