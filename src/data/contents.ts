@@ -88,7 +88,7 @@ export const experiences = [
     img: "https://static.wixstatic.com/media/97f83e_e838fc0b3cb64b34b8e19439e0e70fbc~mv2.png/v1/fit/w_2500,h_1330,al_c/97f83e_e838fc0b3cb64b34b8e19439e0e70fbc~mv2.png",
     role: "Frontend Developer",
     company: "iMemori.ai",
-    date: "Aug 2022 - Present",
+    date: "Aug 2022 - Sept 2024",
     desc: [
       "• Developed and maintained web applications using React.js, ensuring high performance and responsiveness.",
       "• Utilized Typescript to create type-safe and efficient React components.",
