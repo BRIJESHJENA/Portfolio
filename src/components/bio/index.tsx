@@ -94,7 +94,7 @@ const whatImDoing = [
     ),
   },
   {
-    do: "Web Development",
+    do: "Full Stack Development",
     img: (
       <svg
         width="40"

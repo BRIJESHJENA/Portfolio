@@ -24,7 +24,7 @@ const ExperienceSection: React.FC = () => {
                 flexDirection: desktopView ? "column" : "row",
                 justifyContent: "flex-start",
               }}
-              width={!desktopView ? "100%" : "auto"}
+              minWidth="150px"
             >
               <Avatar
                 src={exp.img}
