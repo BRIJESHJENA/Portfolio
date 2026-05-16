@@ -2,6 +2,15 @@ import pro1 from "../assets/images/weatherReact.png";
 import pro2 from "../assets/images/foodSampatti.png";
 import pro3 from "../assets/images/codeEditorImg.jpg";
 
+/** Reliable CDN icons — devicon & simpleicons */
+const devicon = (name: string, variant = "original") =>
+  `https://cdn.jsdelivr.net/gh/devicons/devicon/icons/${name}/${name}-${variant}.svg`;
+
+const simpleIcon = (name: string, color?: string) =>
+  color
+    ? `https://cdn.simpleicons.org/${name}/${color}`
+    : `https://cdn.simpleicons.org/${name}`;
+
 export const Bio = {
   name: "BRIJESH JENA",
   roles: ["Frontend Developer"],
@@ -18,154 +27,73 @@ export const Bio = {
 
 export const skills = [
   {
-    title: "Frontend",
+    title: "Languages & Markup",
     skills: [
-      {
-        name: "React Js",
-        image:
-          "https://res.cloudinary.com/practicaldev/image/fetch/s--qo_Wp38Z--/c_limit%2Cf_auto%2Cfl_progressive%2Cq_auto%2Cw_880/https://dev-to-uploads.s3.amazonaws.com/i/e0nl7ziy1la7bpwj7rsp.png",
-      },
-      {
-        name: "Redux",
-        image:
-          "https://d33wubrfki0l68.cloudfront.net/0834d0215db51e91525a25acf97433051f280f2f/c30f5/img/redux.svg",
-      },
-      {
-        name: "HTML",
-        image: "https://www.w3.org/html/logo/badge/html5-badge-h-solo.png",
-      },
-      {
-        name: "CSS",
-        image:
-          "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d5/CSS3_logo_and_wordmark.svg/1452px-CSS3_logo_and_wordmark.svg.png",
-      },
-      {
-        name: "JavaScript",
-        image:
-          "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6a/JavaScript-logo.png/800px-JavaScript-logo.png",
-      },
-      {
-        name: "TypeScript",
-        image:
-          "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/Typescript_logo_2020.svg/1200px-Typescript_logo_2020.svg.png",
-      },
-      {
-        name: "Bootstrap",
-        image:
-          "https://getbootstrap.com/docs/5.3/assets/brand/bootstrap-logo-shadow.png",
-      },
-      {
-        name: "Material UI",
-        image: "https://mui.com/static/logo.png",
-      },
-      {
-        name: "Jest",
-        image:
-          "https://media.dev.to/cdn-cgi/image/width=1080,height=1080,fit=cover,gravity=auto,format=auto/https%3A%2F%2Fdev-to-uploads.s3.amazonaws.com%2Fuploads%2Farticles%2Fam39icfave7sg54aynkp.png",
-      },
-      {
-        name: "React Testing Library",
-        image:
-          "https://www.npmjs.com/npm-avatar/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdmF0YXJVUkwiOiJodHRwczovL3MuZ3JhdmF0YXIuY29tL2F2YXRhci8yZjJlZGE1Zjk5MDg4ZjlhMmJkM2M3ZDY1Nzc1ZjMyMz9zaXplPTQ5NiZkZWZhdWx0PXJldHJvIn0.GK_iK0AfcN-AIa-cw34YqonuoTowfc-ZngV-e_00PGY",
-      },
-      {
-        name: "Vue.js",
-        image:
-          "https://images.seeklogo.com/logo-png/27/1/vue-js-logo-png_seeklogo-274070.png",
-      },
+      { name: "JavaScript (ES6+)", image: devicon("javascript") },
+      { name: "TypeScript", image: devicon("typescript") },
+      { name: "HTML5", image: devicon("html5") },
+      { name: "CSS3", image: devicon("css3") },
+      { name: "Vue.js", image: devicon("vuejs") },
     ],
   },
-
+  {
+    title: "Frameworks & Libraries",
+    skills: [
+      { name: "React.js", image: devicon("react") },
+      { name: "Next.js", image: devicon("nextjs") },
+      { name: "Vue.js", image: devicon("vuejs") },
+      { name: "Redux", image: devicon("redux") },
+      { name: "Material UI", image: simpleIcon("mui", "007FFF") },
+      { name: "React Router", image: simpleIcon("reactrouter", "CA4245") },
+      { name: "Bootstrap", image: devicon("bootstrap") },
+      { name: "amCharts", image: simpleIcon("apacheecharts", "AA344B") },
+      { name: "Axios", image: simpleIcon("axios", "5A29E4") },
+    ],
+  },
+  {
+    title: "Testing",
+    skills: [
+      { name: "Jest", image: devicon("jest", "plain") },
+      { name: "React Testing Library", image: simpleIcon("testinglibrary", "E33332") },
+    ],
+  },
   {
     title: "Backend",
     skills: [
-      {
-        name: "Node.js",
-        image:
-          "https://images-cdn.openxcell.com/wp-content/uploads/2024/07/25090553/nodejs-inner.webp",
-      },
-      {
-        name: "Express.js",
-        image:
-          "https://lh3.googleusercontent.com/proxy/bXgIdWDRzdGGfmuwRXPijBkeNBmy3N_K5gSmRWGk3z01seUPM424h4ozs_cr8aR5NdXvyHSJ_sqXptBfR2_81fXAWJvUPV0gObrARsVUSdWe9oEac4uCDwctLXj-L1sPT7nG3C49tul2pqwuSdZEk0jd",
-      },
-      {
-        name: "Firebase",
-        image:
-          "https://firebase.google.com/static/images/brand-guidelines/logo-vertical.png",
-      },
+      { name: "Node.js", image: devicon("nodejs") },
+      { name: "Express.js", image: devicon("express") },
+      { name: "Firebase", image: devicon("firebase", "plain") },
     ],
   },
   {
     title: "Databases",
     skills: [
-      {
-        name: "PostgreSQL",
-        image:
-          "https://upload.wikimedia.org/wikipedia/commons/2/29/Postgresql_elephant.svg",
-      },
-      {
-        name: "Firebase Firestore",
-        image:
-          "https://firebase.google.com/static/images/brand-guidelines/logo-vertical.png",
-      },
+      { name: "PostgreSQL", image: devicon("postgresql") },
+      { name: "Firebase Firestore", image: devicon("firebase", "plain") },
     ],
   },
   {
     title: "Authentication & Integrations",
     skills: [
-      {
-        name: "Firebase Auth",
-        image:
-          "https://firebase.google.com/static/images/brand-guidelines/logo-vertical.png",
-      },
-      {
-        name: "OAuth (Facebook & Twitter)",
-        image:
-          "https://upload.wikimedia.org/wikipedia/commons/d/d2/Oauth_logo.svg",
-      },
-      {
-        name: "Calendly API",
-        image:
-          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ_MLuP2D6YoTIN5H1JL8oCAA33KHqPP3Mgvg&s",
-      },
+      { name: "Firebase Auth", image: devicon("firebase", "plain") },
+      { name: "OAuth (Facebook & Twitter)", image: simpleIcon("auth0", "EB5424") },
+      { name: "Calendly API", image: simpleIcon("calendly", "006BFF") },
     ],
   },
   {
     title: "Tools & DevOps",
     skills: [
-      {
-        name: "Git",
-        image: "https://git-scm.com/images/logos/downloads/Git-Icon-1788C.png",
-      },
-      {
-        name: "GitHub",
-        image:
-          "https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png",
-      },
-      {
-        name: "Netlify",
-        image: "https://www.netlify.com/v3/img/components/logomark.png",
-      },
-      {
-        name: "Jira",
-        image: "https://cdn.worldvectorlogo.com/logos/jira-1.svg",
-      },
+      { name: "Git", image: devicon("git") },
+      { name: "GitHub", image: devicon("github") },
+      { name: "Netlify", image: devicon("netlify") },
+      { name: "Jira", image: devicon("jira") },
     ],
   },
   {
     title: "Others",
     skills: [
-      {
-        name: "GitHub",
-        image:
-          "https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png",
-      },
-      {
-        name: "VS Code",
-        image:
-          "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/Visual_Studio_Code_1.35_icon.svg/512px-Visual_Studio_Code_1.35_icon.svg.png?20210804221519",
-      },
+      { name: "GitHub", image: devicon("github") },
+      { name: "VS Code", image: devicon("vscode") },
     ],
   },
 ];
@@ -214,7 +142,17 @@ export const experiences = [
       "•Translated designs & wireframes into high-quality code and wrote application interface code via JavaScript ES6 following React.js and React.ts workflows.",
       "• Developed over 15 React components from scratch, including features such as form validation, tab list, grid lists, search and sort functionalities, pagination, multi-selection, tags input, and interactive charts, enhancing user interaction and data visualization capabilities.",
     ],
-    skills: ["React", "MUI", "Amchart", "Jest", "JavaScript", "TypeScript"],
+    skills: [
+      "React.js",
+      "TypeScript",
+      "JavaScript",
+      "React Router",
+      "Redux",
+      "Material UI",
+      "amCharts",
+      "Axios",
+      "Jest",
+    ],
   },
 ];
 

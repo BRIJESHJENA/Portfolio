@@ -1,54 +1,57 @@
 import { useEffect, useState } from "react";
 
-export default function useBreakpoint() {
-  const [mobileView, setMobileView] = useState<boolean>(false);
-  const [tabletView, setTabletView] = useState<boolean>(false);
-  const [desktopView, setDesktopView] = useState<boolean>(false);
-  const [windowWidth, setWindowWidth] = useState<number>(0);
+export const BREAKPOINTS = {
+  sm: 576,
+  md: 768,
+  lg: 992,
+  xl: 1200,
+} as const;
 
-  const breakpoints = {
-    values: {
-      xs: 0,
-      sm: 576,
-      md: 768,
-      lg: 992,
-      xl: 1200,
-      xxl: 1400,
-    },
-  };
+export type BreakpointState = {
+  mobile: boolean;
+  tablet: boolean;
+  desktop: boolean;
+  /** Sidebar + main side-by-side (≥ md) */
+  sideLayout: boolean;
+  /** Wide sidebar (≥ xl) */
+  wideSidebar: boolean;
+  width: number;
+};
+
+const getState = (width: number): BreakpointState => ({
+  mobile: width < BREAKPOINTS.md,
+  tablet: width >= BREAKPOINTS.md && width < BREAKPOINTS.xl,
+  desktop: width >= BREAKPOINTS.xl,
+  sideLayout: width >= BREAKPOINTS.md,
+  wideSidebar: width >= BREAKPOINTS.xl,
+  width,
+});
+
+const defaultState = getState(
+  typeof window !== "undefined" ? window.innerWidth : BREAKPOINTS.xl
+);
+
+export default function useBreakpoint(): [
+  boolean,
+  boolean,
+  boolean,
+  number,
+  BreakpointState,
+] {
+  const [state, setState] = useState<BreakpointState>(defaultState);
 
   useEffect(() => {
-    function checkDeviceWidth() {
-      setWindowWidth(window.innerWidth);
-      // * mobile devices - less than 768
-      if (window.innerWidth < breakpoints.values.md) {
-        setMobileView(true);
-      } else {
-        setMobileView(false);
-      }
-
-      // * tablet devices - in between 768 and 1200
-      if (
-        window.innerWidth >= breakpoints.values.md &&
-        window.innerWidth < 1200
-      ) {
-        setTabletView(true);
-      } else {
-        setTabletView(false);
-      }
-
-      // * desktop devices - above 1200
-      if (window.innerWidth >= 1200) {
-        setDesktopView(true);
-      } else {
-        setDesktopView(false);
-      }
-    }
-    window.addEventListener("resize", checkDeviceWidth);
-    checkDeviceWidth();
-
-    return () => window.removeEventListener("resize", checkDeviceWidth);
+    const update = () => setState(getState(window.innerWidth));
+    update();
+    window.addEventListener("resize", update);
+    return () => window.removeEventListener("resize", update);
   }, []);
 
-  return [mobileView, tabletView, desktopView, windowWidth];
+  return [
+    state.mobile,
+    state.tablet,
+    state.desktop,
+    state.width,
+    state,
+  ];
 }
