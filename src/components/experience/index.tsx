@@ -71,7 +71,7 @@ const ExperienceSection: React.FC = () => (
                     key={i}
                     sx={{ fontSize: { xs: "0.8rem", sm: "0.875rem" }, mb: 0.75, lineHeight: 1.55, fontWeight: 500 }}
                   >
-                    - {item}
+                    {item}
                   </Typography>
                 ))}
               </Box>
