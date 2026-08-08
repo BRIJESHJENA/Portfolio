@@ -1,19 +1,36 @@
 {
   "files": {
-    "main.css": "/Portfolio/static/css/main.65b9277a.css",
-    "main.js": "/Portfolio/static/js/main.d9b29c6f.js",
+    "main.css": "/Portfolio/static/css/main.d13df628.css",
+    "main.js": "/Portfolio/static/js/main.01cc0434.js",
     "static/js/453.ace21015.chunk.js": "/Portfolio/static/js/453.ace21015.chunk.js",
-    "static/media/foodSampatti.png": "/Portfolio/static/media/foodSampatti.995c4e3f9dcb57662867.png",
+    "static/media/indianMusicGuru.png": "/Portfolio/static/media/indianMusicGuru.d667f72133251c45093c.png",
+    "static/media/artisteverse.png": "/Portfolio/static/media/artisteverse.735ad0cd319a7f8926f7.png",
+    "static/media/Kyu-Hila-Dala-Na-Rajinikanth-Meme-Template.jpg": "/Portfolio/static/media/Kyu-Hila-Dala-Na-Rajinikanth-Meme-Template.dda6ef4d8c8c5640940c.jpg",
+    "static/media/Kaisa-Laga_Mera-Mazaak-Meme-Template.jpg": "/Portfolio/static/media/Kaisa-Laga_Mera-Mazaak-Meme-Template.0b4b48ee76d7e11632c0.jpg",
+    "static/media/aaoKabhiHawalipe.jpg": "/Portfolio/static/media/aaoKabhiHawalipe.556477ba3bac61987712.jpg",
+    "static/media/Abhi-Maza-Aayega-Na-BHidu-Meme-Template.jpg": "/Portfolio/static/media/Abhi-Maza-Aayega-Na-BHidu-Meme-Template.f57992cded574ed06392.jpg",
     "static/media/codeEditorImg.jpg": "/Portfolio/static/media/codeEditorImg.33bd8e725ca6e84a6214.jpg",
+    "static/media/Aap-chronology-samajhiye-meme-template-stree.jpg": "/Portfolio/static/media/Aap-chronology-samajhiye-meme-template-stree.fd61adc71e2c87093d4c.jpg",
     "static/media/mine-avatar.png": "/Portfolio/static/media/mine-avatar.a6e5faff1f7035b8aef9.png",
+    "static/media/Cheating-Karta-Hai-Meme-Template.jpg": "/Portfolio/static/media/Cheating-Karta-Hai-Meme-Template.a33ac6f0a5f3e276ae17.jpg",
     "static/media/weatherReact.png": "/Portfolio/static/media/weatherReact.f230913ea886126d6900.png",
+    "static/media/abey-saale-meme-template.jpg": "/Portfolio/static/media/abey-saale-meme-template.a50982db91d73318569a.jpg",
+    "static/media/Zomato-happy-boy-Sonu-Meme.jpg": "/Portfolio/static/media/Zomato-happy-boy-Sonu-Meme.acdcab8c8e7221dfafa2.jpg",
+    "static/media/Maine-Bahot-Struggle-Kiya-Meme-Template.png": "/Portfolio/static/media/Maine-Bahot-Struggle-Kiya-Meme-Template.c4aa931588acb6128557.png",
+    "static/media/Bilkul-ricks-nahi-lene-ka-meme-templates.jpg": "/Portfolio/static/media/Bilkul-ricks-nahi-lene-ka-meme-templates.1960b8ddc6d6ca7e9bec.jpg",
+    "static/media/Mujhe-Drugs-Do-Meme-Template-Arnab-Goswami.jpg": "/Portfolio/static/media/Mujhe-Drugs-Do-Meme-Template-Arnab-Goswami.09ed156c8d056aa94277.jpg",
+    "static/media/yeSabDoglapanhai.jfif": "/Portfolio/static/media/yeSabDoglapanhai.829d1e9e91e123da6652.jfif",
+    "static/media/Disappointed-Pakistani-Cricket-Fan-India-Vs-Pak-World-Cup-2019-Meme-Template.jpg": "/Portfolio/static/media/Disappointed-Pakistani-Cricket-Fan-India-Vs-Pak-World-Cup-2019-Meme-Template.05be9af2d43d3a3b8370.jpg",
+    "static/media/Ajay-Devgn-Black-Specs-Meme-Template.jpg": "/Portfolio/static/media/Ajay-Devgn-Black-Specs-Meme-Template.5d4592d19ec7ae07ef8f.jpg",
+    "static/media/main-kya-karu-fir-job-chhod-du-famous-indian-meme-templates.jpg": "/Portfolio/static/media/main-kya-karu-fir-job-chhod-du-famous-indian-meme-templates.f5a7bfca6cdb4712e36c.jpg",
+    "static/media/Kohli-Surprised-meme-template.jpg": "/Portfolio/static/media/Kohli-Surprised-meme-template.52a1ec4c2b00e016c63a.jpg",
     "index.html": "/Portfolio/index.html",
-    "main.65b9277a.css.map": "/Portfolio/static/css/main.65b9277a.css.map",
-    "main.d9b29c6f.js.map": "/Portfolio/static/js/main.d9b29c6f.js.map",
+    "main.d13df628.css.map": "/Portfolio/static/css/main.d13df628.css.map",
+    "main.01cc0434.js.map": "/Portfolio/static/js/main.01cc0434.js.map",
     "453.ace21015.chunk.js.map": "/Portfolio/static/js/453.ace21015.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.65b9277a.css",
-    "static/js/main.d9b29c6f.js"
+    "static/css/main.d13df628.css",
+    "static/js/main.01cc0434.js"
   ]
 }
