@@ -5,6 +5,7 @@ import DarkModeOutlinedIcon from "@mui/icons-material/DarkModeOutlined";
 import MenuRoundedIcon from "@mui/icons-material/MenuRounded";
 import CloseRoundedIcon from "@mui/icons-material/CloseRounded";
 import { Bio } from "../../data/contents.ts";
+import { useResumeDialog } from "../resume/ResumeDialogProvider.tsx";
 
 export const NAV_LINKS = [
   { id: "about", label: "About" },
@@ -34,6 +35,7 @@ const initials = Bio.name
 const Navbar: React.FC<NavbarProps> = ({ isDarkMode, onToggleTheme, activeId }) => {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const { openResume } = useResumeDialog();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8);
@@ -84,14 +86,13 @@ const Navbar: React.FC<NavbarProps> = ({ isDarkMode, onToggleTheme, activeId }) 
               )}
             </button>
 
-            <a
-              href={Bio.resume}
-              target="_blank"
-              rel="noopener noreferrer"
+            <button
+              type="button"
               className="btn btn--primary btn--sm navbar__cta"
+              onClick={() => openResume()}
             >
               Resume
-            </a>
+            </button>
 
             <button
               type="button"
@@ -132,14 +133,16 @@ const Navbar: React.FC<NavbarProps> = ({ isDarkMode, onToggleTheme, activeId }) 
                   </a>
                 ))}
                 <div className="mobile-menu__cta">
-                  <a
-                    href={Bio.resume}
-                    target="_blank"
-                    rel="noopener noreferrer"
+                  <button
+                    type="button"
                     className="btn btn--primary"
+                    onClick={() => {
+                      setMenuOpen(false);
+                      openResume();
+                    }}
                   >
                     Resume
-                  </a>
+                  </button>
                   <a href={`mailto:${Bio.email}`} className="btn btn--ghost">
                     Say hello
                   </a>

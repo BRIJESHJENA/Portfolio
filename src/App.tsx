@@ -12,6 +12,7 @@ import EducationSection from "./components/education/index.tsx";
 // import MemesSection from "./components/memes/index.tsx";
 import Contact from "./components/contact/index.tsx";
 import Footer from "./components/footer/index.tsx";
+import { ResumeDialogProvider } from "./components/resume/ResumeDialogProvider.tsx";
 import "./App.css";
 
 const THEME_KEY = "portfolio-theme";
@@ -66,40 +67,42 @@ const App: React.FC = () => {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <div className="app-root">
-        <div className="app-glow" aria-hidden />
+      <ResumeDialogProvider>
+        <div className="app-root">
+          <div className="app-glow" aria-hidden />
 
-        <Navbar
-          isDarkMode={isDarkMode}
-          onToggleTheme={() => setIsDarkMode((prev) => !prev)}
-          activeId={activeId}
-        />
+          <Navbar
+            isDarkMode={isDarkMode}
+            onToggleTheme={() => setIsDarkMode((prev) => !prev)}
+            activeId={activeId}
+          />
 
-        <main>
-          <BioSection />
-          <ExperienceSection />
-          <ProjectsSection />
-          <SkillsSection />
-          <EducationSection />
-          {/* <MemesSection /> */}
-          <Contact />
-        </main>
+          <main>
+            <BioSection />
+            <ExperienceSection />
+            <ProjectsSection />
+            <SkillsSection />
+            <EducationSection />
+            {/* <MemesSection /> */}
+            <Contact />
+          </main>
 
-        <Footer />
+          <Footer />
 
-        <MemeFloat activeId={activeId} />
+          <MemeFloat activeId={activeId} />
 
-        {showToTop && (
-          <button
-            type="button"
-            className="to-top"
-            onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-            aria-label="Back to top"
-          >
-            <KeyboardArrowUpRoundedIcon sx={{ fontSize: 22 }} />
-          </button>
-        )}
-      </div>
+          {showToTop && (
+            <button
+              type="button"
+              className="to-top"
+              onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+              aria-label="Back to top"
+            >
+              <KeyboardArrowUpRoundedIcon sx={{ fontSize: 22 }} />
+            </button>
+          )}
+        </div>
+      </ResumeDialogProvider>
     </ThemeProvider>
   );
 };

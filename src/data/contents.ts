@@ -2,6 +2,7 @@ import pro1 from "../assets/images/weatherReact.png";
 import pro2 from "../assets/images/codeEditorImg.jpg";
 import pro3 from "../assets/images/indianMusicGuru.png";
 import pro4 from "../assets/images/artisteverse.png";
+import pro5 from "../assets/images/portfolio.png";
 
 /** Reliable CDN icons — devicon & simpleicons */
 const devicon = (name: string, variant = "original") =>
@@ -12,6 +13,28 @@ const simpleIcon = (name: string, color?: string) =>
     ? `https://cdn.simpleicons.org/${name}/${color}`
     : `https://cdn.simpleicons.org/${name}`;
 
+/** Files live in /public/resume so they keep a clean, linkable URL. */
+const resumeUrl = (file: string) => `${process.env.PUBLIC_URL}/resume/${file}`;
+
+export const resumes = [
+  {
+    id: "ui",
+    label: "Frontend / UI",
+    summary: "React, Next.js, TypeScript and design-system work.",
+    file: resumeUrl("Brijesh_3yrs_UI.pdf"),
+    downloadName: "Brijesh-Jena-Frontend-Engineer.pdf",
+  },
+  {
+    id: "fs",
+    label: "Full Stack",
+    summary: "The same experience framed around Node.js, APIs and databases.",
+    file: resumeUrl("Brijesh_3yrs_FS.pdf"),
+    downloadName: "Brijesh-Jena-Full-Stack-Developer.pdf",
+  },
+];
+
+export type Resume = (typeof resumes)[number];
+
 export const Bio = {
   name: "BRIJESH JENA",
   roles: ["Frontend Engineer", "Full Stack Developer"],
@@ -21,8 +44,7 @@ export const Bio = {
   email: "brijeshjena123@gmail.com",
   phone: 8910186377,
   location: "Bangalore, Karnataka, India",
-  resume:
-    "https://drive.google.com/file/d/1gggS0wsK5PzbMLf243gUjqbdSSrssJOW/view",
+  resume: resumes[0].file,
   linkedin: "https://www.linkedin.com/in/brijesh-jena",
 };
 
@@ -221,6 +243,16 @@ export const projects = [
   },
   {
     id: 2,
+    title: "Portfolio",
+    description:
+      "Personal portfolio built with React and TypeScript — dark/light theming, animated section reveals, and a resume preview with Frontend and Full Stack variants. Deployed on GitHub Pages.",
+    image: pro5,
+    tags: ["React", "TypeScript", "Material UI", "Framer Motion", "GitHub Pages"],
+    github: "https://github.com/BRIJESHJENA/Portfolio",
+    webapp: "https://brijeshjena.github.io/Portfolio/",
+  },
+  {
+    id: 3,
     title: "Code Editor",
     description:
       "React-based code editor for writing and previewing HTML, CSS, and JavaScript in real time. Built with Vite — animated UI, responsive layout, and instant iframe previews for quick testing and learning.",
@@ -230,7 +262,7 @@ export const projects = [
     webapp: "https://codeeditor-brijesh.netlify.app/",
   },
   {
-    id: 3,
+    id: 4,
     title: "Weather App",
     description:
       "Location-based weather app built with React, TypeScript, and Redux, powered by the OpenWeatherMap API for live forecasts and a clean, responsive UI.",
@@ -239,4 +271,5 @@ export const projects = [
     github: "https://github.com/BRIJESHJENA/React-Weather-Web",
     webapp: "https://brijeshjena.github.io/React-Weather-Web/",
   },
+  
 ];

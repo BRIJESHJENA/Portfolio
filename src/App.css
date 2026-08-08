@@ -465,43 +465,6 @@
   }
 }
 
-.hero__status {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 0.35rem 0.8rem 0.35rem 0.55rem;
-  border: 1px solid var(--border);
-  border-radius: var(--radius-pill);
-  background: var(--surface);
-  font-size: 0.75rem;
-  font-weight: 500;
-  color: var(--text-muted);
-}
-
-.status-dot {
-  position: relative;
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
-  background: #22c55e;
-}
-
-.status-dot::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  border-radius: 50%;
-  background: #22c55e;
-  animation: ping 1.8s cubic-bezier(0, 0, 0.2, 1) infinite;
-}
-
-@keyframes ping {
-  75%, 100% {
-    transform: scale(2.4);
-    opacity: 0;
-  }
-}
-
 .hero__title {
   font-family: var(--font-display) !important;
   font-size: clamp(2.35rem, 7vw, 4rem) !important;
@@ -509,7 +472,7 @@
   line-height: 1.03 !important;
   letter-spacing: -0.04em !important;
   color: var(--text) !important;
-  margin: 1.25rem 0 0 !important;
+  margin: 0 !important;
 }
 
 .hero__title-accent {
@@ -543,18 +506,58 @@
   width: min(280px, 72vw);
   margin: 0 auto;
   aspect-ratio: 1;
-  border-radius: 24px;
-  overflow: hidden;
-  border: 1px solid var(--border);
-  background: var(--bg-subtle);
-  box-shadow: var(--shadow-lg);
 }
 
-.hero__portrait img {
+/* Photo fills the full container; clip via border-radius on the img so the
+   SVG badge (a sibling) is NOT clipped by overflow:hidden */
+.hero__portrait-frame {
+  width: 100%;
+  height: 100%;
+  background: var(--bg-subtle);
+  box-shadow:
+    0 0 0 1px var(--border),
+    var(--shadow-lg);
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.hero__portrait-frame img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   display: block;
+}
+
+/* Open-to-work arc — painted ON the bottom edge of the photo, LinkedIn-style */
+.hero__open-badge {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.hero__open-sash {
+  stroke: var(--accent);
+  stroke-width: 10;
+}
+
+.hero__open-text {
+  fill: #fff;
+  font-family: var(--font-mono);
+  font-size: 5.8px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+}
+
+.hero__open-dot {
+  fill: #fff;
+  animation: open-dot-pulse 2.2s ease-in-out infinite;
+}
+
+@keyframes open-dot-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.35; }
 }
 
 /* Stats */
@@ -1300,6 +1303,180 @@
   margin-top: 1rem;
 }
 
+/* ── Resume preview dialog ───────────────────────────────── */
+.resume-dialog {
+  position: fixed;
+  inset: 0;
+  z-index: 90;
+  display: grid;
+  place-items: center;
+  padding: 1.25rem;
+}
+
+.resume-dialog__backdrop {
+  position: absolute;
+  inset: 0;
+  border: 0;
+  padding: 0;
+  background: rgba(9, 9, 11, 0.6);
+  backdrop-filter: blur(4px);
+  cursor: pointer;
+}
+
+.resume-dialog__panel {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  width: min(100%, 860px);
+  max-height: min(92dvh, 940px);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  background: var(--surface);
+  box-shadow: var(--shadow-lg);
+  padding: 1.25rem 1.25rem 1.5rem;
+}
+
+.resume-dialog__header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.resume-dialog__eyebrow {
+  margin: 0 0 0.25rem;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-faint);
+}
+
+.resume-dialog__title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  font-weight: 650;
+  line-height: 1.3;
+  color: var(--text);
+}
+
+.resume-dialog__close {
+  flex-shrink: 0;
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: transparent;
+  color: var(--text-muted);
+  cursor: pointer;
+}
+
+.resume-dialog__close:hover {
+  background: var(--surface-hover);
+  color: var(--text);
+}
+
+.resume-dialog__tabs {
+  display: flex;
+  gap: 0.15rem;
+  align-self: flex-start;
+  margin-top: 1rem;
+  padding: 0.25rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-pill);
+  background: var(--bg-subtle);
+}
+
+.resume-tab {
+  padding: 0.4rem 0.95rem;
+  border: 0;
+  border-radius: var(--radius-pill);
+  background: none;
+  font-family: inherit;
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: color 0.18s ease, background 0.18s ease;
+}
+
+.resume-tab:hover {
+  color: var(--text);
+}
+
+.resume-tab.active {
+  background: var(--accent-soft);
+  color: var(--text);
+}
+
+.resume-dialog__summary {
+  margin: 0.85rem 0 1rem;
+  font-size: 0.86rem;
+  line-height: 1.5;
+  color: var(--text-muted);
+}
+
+.resume-dialog__viewer {
+  flex: 1;
+  min-height: 0;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: var(--bg-subtle);
+}
+
+.resume-dialog__viewer iframe {
+  display: block;
+  width: 100%;
+  height: min(60dvh, 620px);
+  border: 0;
+}
+
+.resume-dialog__fallback {
+  display: none;
+}
+
+.resume-dialog__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin-top: 1.1rem;
+}
+
+/* Phones can't be trusted to render a PDF in an iframe, so swap the preview
+   for a short prompt and let the action buttons do the work. */
+@media (max-width: 767px) {
+  .resume-dialog__viewer {
+    display: none;
+  }
+
+  .resume-dialog__fallback {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 1rem;
+    border: 1px dashed var(--border-strong);
+    border-radius: var(--radius);
+    background: var(--bg-subtle);
+    color: var(--text-muted);
+  }
+
+  .resume-dialog__fallback p {
+    margin: 0;
+    font-size: 0.84rem;
+    line-height: 1.5;
+  }
+
+  .resume-dialog__actions .btn {
+    flex: 1;
+  }
+}
+
 /* Meme wall carousel inside the popup */
 .meme-carousel {
   display: flex;
@@ -1434,10 +1611,16 @@
   justify-content: center;
 }
 
+/* Also applied to a <button> for the resume preview, hence the resets. */
 .footer__link {
+  padding: 0;
+  border: 0;
+  background: none;
+  font-family: inherit;
   font-size: 0.82rem;
   color: var(--text-muted);
   text-decoration: none;
+  cursor: pointer;
   transition: color 0.18s ease;
 }
 
