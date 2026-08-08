@@ -6,35 +6,33 @@ interface SectionHeaderProps {
   label?: string;
   title: string;
   subtitle?: string;
-  align?: "left" | "center";
+  action?: React.ReactNode;
 }
 
-const SectionHeader: React.FC<SectionHeaderProps> = ({
-  label,
-  title,
-  subtitle,
-  align = "center",
-}) => (
+const SectionHeader: React.FC<SectionHeaderProps> = ({ label, title, subtitle, action }) => (
   <ScrollReveal>
     <Box
       sx={{
-        textAlign: align,
-        mb: 5,
+        display: "flex",
+        alignItems: { xs: "flex-start", md: "flex-end" },
+        justifyContent: "space-between",
+        flexDirection: { xs: "column", md: "row" },
+        gap: 2,
+        mb: { xs: 3, md: 4.5 },
       }}
     >
-      {label && (
-        <Typography className="section-label" sx={{ mb: 1 }}>
-          {label}
+      <Box>
+        {label && <Typography className="eyebrow">{label}</Typography>}
+        <Typography component="h2" className="section-title" sx={{ mt: label ? 1.5 : 0 }}>
+          {title}
         </Typography>
-      )}
-      <Typography variant="h2" className="section-title" component="h2">
-        {title}
-      </Typography>
-      {subtitle && (
-        <Typography className="section-subtitle" sx={{ mt: 2, maxWidth: 560, mx: align === "center" ? "auto" : 0 }}>
-          {subtitle}
-        </Typography>
-      )}
+        {subtitle && (
+          <Typography className="section-subtitle" sx={{ mt: 1.5 }}>
+            {subtitle}
+          </Typography>
+        )}
+      </Box>
+      {action}
     </Box>
   </ScrollReveal>
 );

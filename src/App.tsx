@@ -1,117 +1,105 @@
-import React, { useState } from "react";
-import { ThemeProvider, CssBaseline, Box, createTheme } from "@mui/material";
+import React, { useEffect, useMemo, useState } from "react";
+import { ThemeProvider, CssBaseline, createTheme } from "@mui/material";
+import KeyboardArrowUpRoundedIcon from "@mui/icons-material/KeyboardArrowUpRounded";
+import Navbar, { SECTION_IDS } from "./components/navbar/index.tsx";
+import MemeFloat from "./components/memes/MemeFloat.tsx";
+import useActiveSection from "./hooks/useActiveSection.ts";
 import BioSection from "./components/bio/index.tsx";
-import SkillsSection from "./components/skills/index.tsx";
 import ExperienceSection from "./components/experience/index.tsx";
-import EducationSection from "./components/education/index.tsx";
 import ProjectsSection from "./components/project/index.tsx";
-import Sidebar from "./components/sidebar/index.tsx";
-import useBreakpoint from "./assets/breakpoints/index.tsx";
-import Marquee from "./components/common/Marquee.tsx";
-import "./App.css";
+import SkillsSection from "./components/skills/index.tsx";
+import EducationSection from "./components/education/index.tsx";
+// import MemesSection from "./components/memes/index.tsx";
 import Contact from "./components/contact/index.tsx";
+import Footer from "./components/footer/index.tsx";
+import "./App.css";
 
-const MARQUEE_ITEMS = [
-  "FULL STACK DEV",
-  "REACT",
-  "TYPESCRIPT",
-  "NODE.JS",
-  "UI/UX",
-  "OPEN TO WORK",
-  "PORTFOLIO 2026",
-];
+const THEME_KEY = "portfolio-theme";
+
+const getInitialTheme = () => {
+  if (typeof window === "undefined") return true;
+  const stored = window.localStorage.getItem(THEME_KEY);
+  if (stored) return stored === "dark";
+  return window.matchMedia("(prefers-color-scheme: dark)").matches;
+};
 
 const App: React.FC = () => {
-  const [isDarkMode, setIsDarkMode] = useState(true);
-  const [, , , , bp] = useBreakpoint();
+  const [isDarkMode, setIsDarkMode] = useState(getInitialTheme);
+  const [showToTop, setShowToTop] = useState(false);
+  const activeId = useActiveSection(SECTION_IDS);
 
-  const theme = createTheme({
-    palette: {
-      mode: isDarkMode ? "dark" : "light",
-      primary: { main: "#ff4d9d" },
-      secondary: { main: "#5bc0ff" },
-      background: {
-        default: isDarkMode ? "#0e0e14" : "#fffef5",
-        paper: isDarkMode ? "#181824" : "#fffef5",
-      },
-      text: {
-        primary: isDarkMode ? "#ececf4" : "#0a0a0a",
-        secondary: isDarkMode ? "rgba(236,236,244,0.72)" : "rgba(10,10,10,0.65)",
-      },
-    },
-    typography: {
-      fontFamily: '"DM Sans", sans-serif',
-      h1: { fontFamily: '"Archivo Black", sans-serif', fontWeight: 900 },
-      h2: { fontFamily: '"Archivo Black", sans-serif', fontWeight: 900 },
-      h3: { fontFamily: '"Archivo Black", sans-serif', fontWeight: 900 },
-    },
-    shape: { borderRadius: 4 },
-    breakpoints: {
-      values: { xs: 0, sm: 576, md: 768, lg: 992, xl: 1200 },
-    },
-    components: {
-      MuiPaper: {
-        styleOverrides: { root: { backgroundImage: "none", boxShadow: "none" } },
-      },
-    },
-  });
+  useEffect(() => {
+    document.documentElement.setAttribute("data-theme", isDarkMode ? "dark" : "light");
+    window.localStorage.setItem(THEME_KEY, isDarkMode ? "dark" : "light");
+  }, [isDarkMode]);
+
+  useEffect(() => {
+    const onScroll = () => setShowToTop(window.scrollY > 600);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  const theme = useMemo(
+    () =>
+      createTheme({
+        palette: {
+          mode: isDarkMode ? "dark" : "light",
+          primary: { main: isDarkMode ? "#8b8bf5" : "#6366f1" },
+          background: {
+            default: isDarkMode ? "#09090b" : "#ffffff",
+            paper: isDarkMode ? "#111114" : "#ffffff",
+          },
+          text: {
+            primary: isDarkMode ? "#fafafa" : "#0b0b0d",
+            secondary: isDarkMode ? "#a1a1aa" : "#6b7280",
+          },
+        },
+        typography: {
+          fontFamily: '"Inter", "Segoe UI", sans-serif',
+        },
+        shape: { borderRadius: 12 },
+        breakpoints: { values: { xs: 0, sm: 576, md: 768, lg: 992, xl: 1200 } },
+      }),
+    [isDarkMode]
+  );
 
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <Box
-        className="gradient-bg app-root"
-        data-theme={isDarkMode ? "dark" : "light"}
-      >
-        <Box className="vibe-grid-bg" aria-hidden />
+      <div className="app-root">
+        <div className="app-glow" aria-hidden />
 
-        {!bp.mobile && (
-          <>
-            <Box
-              className="floating-orb"
-              sx={{ width: 320, height: 320, top: "5%", right: "-5%", background: "#ff4d9d" }}
-            />
-            <Box
-              className="floating-orb"
-              sx={{
-                width: 280,
-                height: 280,
-                bottom: "10%",
-                left: "-8%",
-                background: "#5bc0ff",
-                animationDelay: "4s",
-              }}
-            />
-          </>
+        <Navbar
+          isDarkMode={isDarkMode}
+          onToggleTheme={() => setIsDarkMode((prev) => !prev)}
+          activeId={activeId}
+        />
+
+        <main>
+          <BioSection />
+          <ExperienceSection />
+          <ProjectsSection />
+          <SkillsSection />
+          <EducationSection />
+          {/* <MemesSection /> */}
+          <Contact />
+        </main>
+
+        <Footer />
+
+        <MemeFloat activeId={activeId} />
+
+        {showToTop && (
+          <button
+            type="button"
+            className="to-top"
+            onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+            aria-label="Back to top"
+          >
+            <KeyboardArrowUpRoundedIcon sx={{ fontSize: 22 }} />
+          </button>
         )}
-
-        <Box className="app-shell">
-          <Sidebar checkedCall={isDarkMode} onChangeCall={() => setIsDarkMode(!isDarkMode)} />
-
-          <Box component="main" className="main">
-            <Marquee items={MARQUEE_ITEMS} />
-
-            <Box className="main-content">
-              <Box id="about" className="main-section">
-                <BioSection />
-              </Box>
-              <Box id="experience" className="main-section">
-                <ExperienceSection />
-              </Box>
-              <Box id="projects" className="main-section">
-                <ProjectsSection />
-              </Box>
-              <Box id="skills" className="main-section">
-                <SkillsSection />
-                <EducationSection />
-              </Box>
-              <Box id="contact" className="main-section main-section--last">
-                <Contact />
-              </Box>
-            </Box>
-          </Box>
-        </Box>
-      </Box>
+      </div>
     </ThemeProvider>
   );
 };

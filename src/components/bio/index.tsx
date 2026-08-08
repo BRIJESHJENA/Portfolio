@@ -1,146 +1,139 @@
 import React from "react";
-import { Box, Typography, Grid } from "@mui/material";
-import { Bio } from "../../data/contents.ts";
+import { Box, Typography } from "@mui/material";
+import ArrowOutwardRoundedIcon from "@mui/icons-material/ArrowOutwardRounded";
+import MailOutlineRoundedIcon from "@mui/icons-material/MailOutlineRounded";
+import DesignServicesOutlinedIcon from "@mui/icons-material/DesignServicesOutlined";
+import LayersOutlinedIcon from "@mui/icons-material/LayersOutlined";
+import SpeedOutlinedIcon from "@mui/icons-material/SpeedOutlined";
+import { Bio, experiences, projects, skills } from "../../data/contents.ts";
 import ScrollReveal from "../common/ScrollReveal.tsx";
-import SectionHeader from "../common/SectionHeader.tsx";
-import RetroBox from "../common/RetroBox.tsx";
-import PageSection from "../common/PageSection.tsx";
+import mineAvatar from "../../assets/images/mine-avatar.png";
 
-const services = [
+const technologyCount = skills.reduce((total, group) => total + group.skills.length, 0);
+
+const stats = [
+  { value: "3.7+", label: "Years experience" },
+  { value: String(projects.length), label: "Projects shipped" },
+  { value: String(experiences.length), label: "Companies" },
+  { value: `${Math.floor(technologyCount / 5) * 5}+`, label: "Technologies" },
+];
+
+const focusAreas = [
   {
-    emoji: "🎨",
-    title: "Web Design",
-    desc: "Bold, accessible interfaces with neo-brutalist flair and pixel-perfect detail.",
-    variant: "yellow" as const,
+    icon: <DesignServicesOutlinedIcon sx={{ fontSize: 20 }} />,
+    title: "Frontend engineering",
+    desc: "Scalable React, Next.js, and Vue interfaces built on reusable component systems.",
   },
   {
-    emoji: "💻",
-    title: "Full Stack",
-    desc: "End-to-end apps with React, Node.js, and modern tooling from idea to deploy.",
-    variant: "blue" as const,
+    icon: <LayersOutlinedIcon sx={{ fontSize: 20 }} />,
+    title: "Full-stack delivery",
+    desc: "End-to-end features with Node.js, Express, Firebase, and REST API integration.",
   },
   {
-    emoji: "⚡",
-    title: "UI/UX",
-    desc: "Motion-rich experiences with scroll animations and delightful micro-interactions.",
-    variant: "pink" as const,
+    icon: <SpeedOutlinedIcon sx={{ fontSize: 20 }} />,
+    title: "Performance & quality",
+    desc: "Jest coverage, SonarQube hygiene, and rendering optimizations that ship clean.",
   },
 ];
 
 const BioSection: React.FC = () => (
-  <PageSection id="bio" sx={{ pt: { xs: 1, sm: 2 } }}>
-    <ScrollReveal direction="scale">
-      <Box className="hero-banner" sx={{ p: { xs: 2, sm: 3, md: 4, lg: 5 }, mb: { xs: 3, md: 4 }, textAlign: "center" }}>
-        <Typography className="hero-title" component="h1">
-          {Bio.name}
-        </Typography>
-        <Box sx={{ mt: { xs: 1.5, md: 2 } }}>
-          <Typography className="hero-role" component="span">
-            {Bio.roles[0]}
+  <section id="about" className="hero">
+    <div className="container">
+      <div className="hero__grid">
+        <ScrollReveal>
+          <Box className="hero__status">
+            <span className="status-dot" />
+            Available for new opportunities
+          </Box>
+
+          <Typography component="h1" className="hero__title">
+            {Bio.name.split(" ")[0].toLowerCase()}{" "}
+            <span className="hero__title-accent">
+              {Bio.name.split(" ").slice(1).join(" ").toLowerCase()}
+            </span>
           </Typography>
-        </Box>
-        <Typography
-          className="hero-banner__desc"
-          sx={{
-            mt: { xs: 2, md: 3 },
-            maxWidth: 560,
-            mx: "auto",
-            fontSize: { xs: "0.95rem", sm: "1.05rem", md: "1.1rem" },
-            lineHeight: 1.7,
-            fontWeight: 500,
-            px: { xs: 0.5, sm: 0 },
-          }}
-        >
-          {Bio.description}
-        </Typography>
-        <Box className="hero-cta">
-          <a href={Bio.github} target="_blank" rel="noopener noreferrer" className="brutal-btn">
-            GitHub
-          </a>
-          <a href={Bio.linkedin} target="_blank" rel="noopener noreferrer" className="brutal-btn brutal-btn--blue">
-            LinkedIn
-          </a>
-          <a href={Bio.resume} target="_blank" rel="noopener noreferrer" className="brutal-btn brutal-btn--white">
-            Resume
-          </a>
-        </Box>
-      </Box>
-    </ScrollReveal>
 
-    <SectionHeader
-      label="What I do"
-      title="Build Things That Pop"
-      subtitle="Design meets code — shipping products with personality, performance, and polish."
-    />
+          <Box className="hero__roles">
+            {Bio.roles.map((role) => (
+              <span key={role} className="chip chip--mono">
+                {role}
+              </span>
+            ))}
+          </Box>
 
-    <Grid container spacing={{ xs: 1.5, sm: 2 }} className="equal-height-grid" sx={{ mb: { xs: 3, md: 5 } }}>
-      {services.map((item, i) => (
-        <Grid item xs={12} sm={6} md={4} key={item.title} sx={{ display: "flex" }}>
-          <ScrollReveal delay={i * 0.1} direction="up" stretch>
-            <RetroBox
-              variant={item.variant}
-              sx={{ p: { xs: 2, sm: 2.5, md: 3 }, width: "100%", flex: 1, display: "flex", flexDirection: "column" }}
+          <Typography className="hero__desc">{Bio.description}</Typography>
+
+          <Box className="hero__cta">
+            <a href="#contact" className="btn btn--primary">
+              <MailOutlineRoundedIcon sx={{ fontSize: 16 }} />
+              Get in touch
+            </a>
+            <a
+              href={Bio.resume}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn btn--ghost"
             >
-              <Typography sx={{ fontSize: { xs: "2rem", md: "2.5rem" }, mb: 1 }}>{item.emoji}</Typography>
-              <Typography
-                sx={{
-                  fontFamily: "var(--font-display)",
-                  fontSize: { xs: "0.95rem", md: "1.1rem" },
-                  fontWeight: 900,
-                  textTransform: "uppercase",
-                  mb: 1,
-                }}
-              >
-                {item.title}
-              </Typography>
-              <Typography sx={{ fontSize: { xs: "0.85rem", md: "0.9rem" }, lineHeight: 1.6, fontWeight: 500, flex: 1 }}>
-                {item.desc}
-              </Typography>
-            </RetroBox>
-          </ScrollReveal>
-        </Grid>
-      ))}
-    </Grid>
-
-    <ScrollReveal>
-      <RetroBox variant="white" sx={{ p: { xs: 2, sm: 3, md: 4 }, textAlign: "center" }}>
-        <Typography
-          sx={{
-            fontFamily: "var(--font-display)",
-            fontSize: { xs: "1.2rem", md: "1.5rem" },
-            textTransform: "uppercase",
-            mb: { xs: 2, md: 3 },
-          }}
-        >
-          Get In Touch
-        </Typography>
-        <Box sx={{ display: "flex", flexDirection: "column", gap: 1.5, alignItems: "center" }}>
-          {[
-            { label: "Email", value: Bio.email },
-            { label: "Phone", value: Bio.phone },
-            { label: "Location", value: Bio.location },
-          ].map((row) => (
-            <Box
-              key={row.label}
-              sx={{
-                display: "flex",
-                flexDirection: { xs: "column", sm: "row" },
-                gap: { xs: 0.5, sm: 2 },
-                alignItems: "center",
-                justifyContent: "center",
-                textAlign: "center",
-              }}
+              Resume
+              <ArrowOutwardRoundedIcon sx={{ fontSize: 15 }} />
+            </a>
+            <a href={Bio.github} target="_blank" rel="noopener noreferrer" className="btn btn--ghost">
+              GitHub
+              <ArrowOutwardRoundedIcon sx={{ fontSize: 15 }} />
+            </a>
+            <a
+              href={Bio.linkedin}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn btn--ghost"
             >
-              <span className="brutal-chip brutal-chip--yellow">{row.label}</span>
-              <Typography sx={{ fontWeight: 600, fontSize: { xs: "0.85rem", sm: "1rem" }, wordBreak: "break-word" }}>
-                {row.value}
-              </Typography>
+              LinkedIn
+              <ArrowOutwardRoundedIcon sx={{ fontSize: 15 }} />
+            </a>
+          </Box>
+        </ScrollReveal>
+
+        <ScrollReveal direction="scale" delay={0.1}>
+          <Box className="hero__portrait">
+            <img src={mineAvatar} alt={Bio.name} />
+          </Box>
+        </ScrollReveal>
+      </div>
+
+      <ScrollReveal delay={0.15}>
+        <Box className="stats">
+          {stats.map((stat) => (
+            <Box key={stat.label} className="stat">
+              <Typography className="stat__value">{stat.value}</Typography>
+              <Typography className="stat__label">{stat.label}</Typography>
             </Box>
           ))}
         </Box>
-      </RetroBox>
-    </ScrollReveal>
-  </PageSection>
+      </ScrollReveal>
+
+      <Box sx={{ mt: { xs: 5, md: 8 } }}>
+        <ScrollReveal>
+          <Typography className="eyebrow" sx={{ mb: 2.5 }}>
+            What I do
+          </Typography>
+        </ScrollReveal>
+
+        <div className="focus-grid">
+          {focusAreas.map((area, index) => (
+            <ScrollReveal key={area.title} delay={index * 0.08} stretch>
+              <Box className="card card--hover focus-card">
+                <Box className="focus-card__icon">{area.icon}</Box>
+                <Typography className="card-title" sx={{ fontSize: "1rem", mb: 0.85 }}>
+                  {area.title}
+                </Typography>
+                <Typography className="body-text">{area.desc}</Typography>
+              </Box>
+            </ScrollReveal>
+          ))}
+        </div>
+      </Box>
+    </div>
+  </section>
 );
 
 export default BioSection;

@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Archivo+Black&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;500&display=swap");
 
 html {
   scroll-behavior: smooth;
@@ -12,16 +12,16 @@ html {
 
 body {
   margin: 0;
-  font-family: "DM Sans", "Segoe UI", sans-serif !important;
+  font-family: "Inter", "Segoe UI", sans-serif !important;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background: #fffef5;
-  color: #0a0a0a;
+  background: #ffffff;
+  color: #0b0b0d;
 }
 
 [data-theme="dark"] body {
-  background: #0e0e14;
-  color: #ececf4;
+  background: #09090b;
+  color: #fafafa;
 }
 
 #root {
@@ -30,4 +30,22 @@ body {
 
 a {
   color: inherit;
+}
+
+::selection {
+  background: rgba(99, 102, 241, 0.22);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }

@@ -1,6 +1,7 @@
 import pro1 from "../assets/images/weatherReact.png";
-import pro2 from "../assets/images/foodSampatti.png";
-import pro3 from "../assets/images/codeEditorImg.jpg";
+import pro2 from "../assets/images/codeEditorImg.jpg";
+import pro3 from "../assets/images/indianMusicGuru.png";
+import pro4 from "../assets/images/artisteverse.png";
 
 /** Reliable CDN icons — devicon & simpleicons */
 const devicon = (name: string, variant = "original") =>
@@ -13,16 +14,16 @@ const simpleIcon = (name: string, color?: string) =>
 
 export const Bio = {
   name: "BRIJESH JENA",
-  roles: ["Frontend Developer"],
+  roles: ["Frontend Engineer", "Full Stack Developer"],
   description:
-    "Frontend Developer with 2+ years of experience in building efficient React components, optimizing code quality, and implementing high-coverage unit tests. Skilled in React.js, JavaScript, TypeScript, Router, SonarQube, and Jest, with experience in UI development for Chat LLMs and analytics. Recently expanded into backend development with Express.js and PostgreSQL, along with working on Vue.js. Experience in Firebase integration, Facebook & Twitter authentication, and Calendly booking system implementation. Passionate about full-stack development and building scalable applications.",
+    "Frontend Engineer with 3.7+ years of experience building scalable, high-performance web applications using React.js, Next.js, TypeScript, and Material UI. I ship reusable UI systems, responsive SaaS products, and end-to-end features from requirement gathering to production — with growing full-stack depth in Node.js, Express.js, and PostgreSQL. Currently crafting creator platforms at MetaStar Media, including IndianMusicGuru and Artisteverse.",
   github: "https://github.com/BRIJESHJENA",
   email: "brijeshjena123@gmail.com",
   phone: 8910186377,
-  location: "Bangalore,India",
+  location: "Bangalore, Karnataka, India",
   resume:
     "https://drive.google.com/file/d/1gggS0wsK5PzbMLf243gUjqbdSSrssJOW/view",
-  linkedin: "https://www.linkedin.com/in/brijesh-jena-071ab6215/",
+  linkedin: "https://www.linkedin.com/in/brijesh-jena",
 };
 
 export const skills = [
@@ -33,7 +34,6 @@ export const skills = [
       { name: "TypeScript", image: devicon("typescript") },
       { name: "HTML5", image: devicon("html5") },
       { name: "CSS3", image: devicon("css3") },
-      { name: "Vue.js", image: devicon("vuejs") },
     ],
   },
   {
@@ -51,10 +51,11 @@ export const skills = [
     ],
   },
   {
-    title: "Testing",
+    title: "State Management",
     skills: [
-      { name: "Jest", image: devicon("jest", "plain") },
-      { name: "React Testing Library", image: simpleIcon("testinglibrary", "E33332") },
+      { name: "Redux", image: devicon("redux") },
+      { name: "Context API", image: devicon("react") },
+      { name: "Vuex / Pinia", image: simpleIcon("vuedotjs", "4FC08D") },
     ],
   },
   {
@@ -62,6 +63,7 @@ export const skills = [
     skills: [
       { name: "Node.js", image: devicon("nodejs") },
       { name: "Express.js", image: devicon("express") },
+      { name: "RESTful APIs", image: simpleIcon("fastapi", "009688") },
       { name: "Firebase", image: devicon("firebase", "plain") },
     ],
   },
@@ -73,11 +75,16 @@ export const skills = [
     ],
   },
   {
-    title: "Authentication & Integrations",
+    title: "Testing & Quality",
     skills: [
-      { name: "Firebase Auth", image: devicon("firebase", "plain") },
-      { name: "OAuth (Facebook & Twitter)", image: simpleIcon("auth0", "EB5424") },
-      { name: "Calendly API", image: simpleIcon("calendly", "006BFF") },
+      { name: "Jest", image: devicon("jest", "plain") },
+      { name: "React Testing Library", image: simpleIcon("testinglibrary", "E33332") },
+      {
+        name: "SonarQube",
+        image:
+          "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/sonarqube/sonarqube-original.svg",
+      },
+      { name: "ESLint", image: devicon("eslint", "original") },
     ],
   },
   {
@@ -85,15 +92,25 @@ export const skills = [
     skills: [
       { name: "Git", image: devicon("git") },
       { name: "GitHub", image: devicon("github") },
+      { name: "Webpack", image: devicon("webpack") },
+      { name: "Babel", image: devicon("babel") },
+      { name: "Vercel", image: simpleIcon("vercel", "000000") },
       { name: "Netlify", image: devicon("netlify") },
       { name: "Jira", image: devicon("jira") },
+      { name: "CI/CD", image: simpleIcon("githubactions", "2088FF") },
     ],
   },
   {
-    title: "Others",
+    title: "AI & Familiar With",
     skills: [
-      { name: "GitHub", image: devicon("github") },
-      { name: "VS Code", image: devicon("vscode") },
+      { name: "Cursor AI", image: simpleIcon("cursor", "000000") },
+      {
+        name: "ChatGPT",
+        image: "https://upload.wikimedia.org/wikipedia/commons/0/04/ChatGPT_logo.svg",
+      },
+      { name: "GitHub Copilot", image: simpleIcon("githubcopilot", "000000") },
+      { name: "Socket.IO", image: simpleIcon("socketdotio", "010101") },
+      { name: "AWS", image: devicon("amazonwebservices", "original-wordmark") },
     ],
   },
 ];
@@ -106,23 +123,24 @@ export const experiences = [
     company: "MetaStar Media",
     date: "Dec 2024 - Present",
     desc: [
-      "• Developing new features and improving user experience in frontend applications using Vue.js.",
-      "• Implemented login authentication by integrating Facebook and Twitter authentication mechanisms.",
-      "• Worked with Firebase on both the frontend and backend for real-time data handling and user authentication.",
-      "• Started backend development using Express.js, managing API endpoints and server-side logic.",
-      "• Gained hands-on experience with PostgreSQL, handling database operations and optimizations.",
-      "• Successfully integrated Calendly in both backend and frontend to facilitate seamless appointment booking.",
+      "• Developed and maintained scalable SaaS applications using React.js, Next.js, Vue.js, TypeScript, and Material UI for IndianMusicGuru and Artisteverse.",
+      "• Built reusable UI components, shared frontend modules, responsive admin dashboards, and CMS workflows to improve scalability and consistency.",
+      "• Integrated REST APIs, Firebase Authentication, third-party services, and HLS-based video streaming for secure, high-performance experiences.",
+      "• Contributed to backend API development with Node.js and Express.js, supporting end-to-end feature delivery.",
+      "• Debugged complex frontend issues, optimized performance, and collaborated across teams through production-ready code reviews.",
+      "• Leveraged AI-assisted tools (Cursor, ChatGPT) to accelerate delivery while validating all AI-generated code before production.",
     ],
     skills: [
-      "HTML",
-      "CSS",
-      "TypeScript",
-      "Javascript",
+      "React.js",
+      "Next.js",
       "Vue.js",
-      "BootStrap",
-      "ExpressJS",
-      "PostgressSQL",
+      "TypeScript",
+      "Material UI",
+      "Node.js",
+      "Express.js",
       "Firebase",
+      "PostgreSQL",
+      "HLS",
     ],
   },
   {
@@ -130,17 +148,16 @@ export const experiences = [
     img: "https://static.wixstatic.com/media/97f83e_e838fc0b3cb64b34b8e19439e0e70fbc~mv2.png/v1/fit/w_2500,h_1330,al_c/97f83e_e838fc0b3cb64b34b8e19439e0e70fbc~mv2.png",
     role: "Frontend Developer",
     company: "iMemori.ai",
-    date: "Aug 2022 - Sept 2024",
+    date: "Aug 2022 - Aug 2024",
     desc: [
-      "• Developed and maintained web applications using React.js, ensuring high performance and responsiveness.",
-      "• Utilized Typescript to create type-safe and efficient React components.",
-      "• Using React Router for seamless navigation.",
-      "• Fixed code quality issues using SonarQube, leading to improved codebase maintainability.",
-      "• Managed project files and assets, ensuring proper organization and version control.",
-      "• Created map and chart displays using amCharts version 5 to visualize data effectively.",
-      "• Collaborated with backend developers to integrate RESTful APIs using axios.",
-      "•Translated designs & wireframes into high-quality code and wrote application interface code via JavaScript ES6 following React.js and React.ts workflows.",
-      "• Developed over 15 React components from scratch, including features such as form validation, tab list, grid lists, search and sort functionalities, pagination, multi-selection, tags input, and interactive charts, enhancing user interaction and data visualization capabilities.",
+      "• Developed responsive, scalable web applications using React.js, TypeScript, and JavaScript.",
+      "• Built reusable UI components that improved application scalability and maintainability.",
+      "• Implemented advanced frontend features including form validation, search, filtering, pagination, and analytics dashboards.",
+      "• Integrated RESTful APIs with Axios and partnered with backend teams for seamless data flow.",
+      "• Integrated amCharts v5 for analytics visualization and interactive dashboards.",
+      "• Wrote unit tests with Jest and React Testing Library, achieving 85%+ code coverage.",
+      "• Worked extensively with SonarQube to reduce technical debt and improve maintainability.",
+      "• Ensured cross-browser compatibility and mobile responsiveness across applications.",
     ],
     skills: [
       "React.js",
@@ -152,6 +169,7 @@ export const experiences = [
       "amCharts",
       "Axios",
       "Jest",
+      "SonarQube",
     ],
   },
 ];
@@ -160,22 +178,22 @@ export const education = [
   {
     id: 0,
     img: "https://upload.wikimedia.org/wikipedia/commons/b/b9/Meghnad_Saha_Institute_of_Technology_Logo.svg",
-    school: "Meghnad Saha Institute of Technology, Kolkata",
-    date: "Aug 2018 - Aug 2021",
-    degree: "Bachelor of Technology - BTech, Civil Engineering",
+    school: "Meghnad Saha Institute of Technology",
+    date: "2018 - 2021",
+    degree: "B.Tech, Civil Engineering",
   },
   {
     id: 1,
     img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSRnSqRItNHdFKfNpakly0oEesulHprcdbG2A&s",
-    school: "KIIT Polytechnic, Bhubaneswar",
-    date: "Aug 2014 - Dec 2017",
-    degree: "Diploma in Civil Engineering",
+    school: "KIIT Polytechnic",
+    date: "2014 - 2017",
+    degree: "Diploma, Civil Engineering",
   },
   {
     id: 2,
     img: "https://www.schoolmykids.com/smk-media/2017/07/kvslogo1.jpg",
-    school: "Kendriya Vidyalaya Command Hospital, Kolkata",
-    date: "Apr 2013 - Apr 2014",
+    school: "Kendriya Vidyalaya Command Hospital",
+    date: "2013 - 2014",
     degree: "Matriculation",
   },
 ];
@@ -183,32 +201,42 @@ export const education = [
 export const projects = [
   {
     id: 0,
+    title: "IndianMusicGuru",
+    description:
+      "Learning platform for Indian classical music — live sessions, course management, authentication, and scheduling. Built end-to-end product features with React/Next.js, backend APIs, and third-party integrations to support the full student and guru workflow.",
+    image: pro3,
+    tags: ["React.js", "Next.js", "TypeScript", "Firebase", "Node.js", "Express.js"],
+    github: "",
+    webapp: "https://indianmusicguru.com/",
+  },
+  {
+    id: 1,
+    title: "Artisteverse",
+    description:
+      "CMS platform for creators to manage digital content, subscriptions, media assets, and orders. Designed scalable admin workflows, backend services, and payment fulfillment integrations for a direct-to-fan experience.",
+    image: pro4,
+    tags: ["Vue.js", "Next.js", "TypeScript", "Firebase", "CMS", "REST APIs"],
+    github: "",
+    webapp: "https://artisteverse.com/",
+  },
+  {
+    id: 2,
     title: "Code Editor",
     description:
-      "This React-based Code Editor lets users write and preview HTML, CSS, and JavaScript in real-time without external libraries. Built with Vite, it features a smooth, animated UI, responsive design, and auto-updating previews. Changes are instantly reflected in an iframe, making it a perfect tool for quick testing and learning web development.",
-    image: pro3,
-    tags: ["HTML", "CSS", "Javascript", "React.js", "Netlify"],
+      "React-based code editor for writing and previewing HTML, CSS, and JavaScript in real time. Built with Vite — animated UI, responsive layout, and instant iframe previews for quick testing and learning.",
+    image: pro2,
+    tags: ["HTML", "CSS", "JavaScript", "React.js", "Vite", "Netlify"],
     github: "https://github.com/BRIJESHJENA/codeEditor",
     webapp: "https://codeeditor-brijesh.netlify.app/",
   },
   {
-    id: 1,
+    id: 3,
     title: "Weather App",
     description:
-      "Website that provides weather information for any location you choose, using HTML, CSS, React, TypeScript, Redux, Javascript weather API have been collected from a website named 'OpenWeatherMap'.",
+      "Location-based weather app built with React, TypeScript, and Redux, powered by the OpenWeatherMap API for live forecasts and a clean, responsive UI.",
     image: pro1,
-    tags: ["HTML", "CSS", "React", "TypeScript", "Redux", "Javascript"],
+    tags: ["React", "TypeScript", "Redux", "JavaScript", "API"],
     github: "https://github.com/BRIJESHJENA/React-Weather-Web",
     webapp: "https://brijeshjena.github.io/React-Weather-Web/",
-  },
-  {
-    id: 2,
-    title: "foodSampatti",
-    description:
-      "I designed and developed a photography portfolio website, Food Sampatti, to showcase my photography work. The site is a visual representation of my passion for capturing culinary art, focusing on aesthetics and user experience. The website serves as an interactive gallery where visitors can explore various food photography collections.",
-    image: pro2,
-    tags: ["HTML", "CSS", "Javascript"],
-    github: "https://github.com/BRIJESHJENA/food_sampatti",
-    webapp: "https://brijeshjena.github.io/food_sampatti/home.html",
   },
 ];

@@ -8,7 +8,7 @@ interface SkillIconProps {
 const FALLBACK = (name: string) =>
   `https://ui-avatars.com/api/?name=${encodeURIComponent(
     name.replace(/[^a-zA-Z0-9+]/g, "").slice(0, 2) || "?"
-  )}&background=ffe14d&color=0a0a0a&size=64&bold=true`;
+  )}&background=e6e6ea&color=0b0b0d&size=64&bold=true`;
 
 const SkillIcon: React.FC<SkillIconProps> = ({ src, name }) => {
   const [imgSrc, setImgSrc] = useState(src);
