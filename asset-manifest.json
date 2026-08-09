@@ -1,7 +1,12 @@
 {
   "files": {
-    "main.css": "/Portfolio/static/css/main.75b67539.css",
-    "main.js": "/Portfolio/static/js/main.6fd3bfa1.js",
+    "main.css": "/Portfolio/static/css/main.56e9c248.css",
+    "main.js": "/Portfolio/static/js/main.36767254.js",
+    "static/js/428.6fb4cf00.chunk.js": "/Portfolio/static/js/428.6fb4cf00.chunk.js",
+    "static/js/267.2549246c.chunk.js": "/Portfolio/static/js/267.2549246c.chunk.js",
+    "static/js/195.88951c19.chunk.js": "/Portfolio/static/js/195.88951c19.chunk.js",
+    "static/js/62.76a29db2.chunk.js": "/Portfolio/static/js/62.76a29db2.chunk.js",
+    "static/js/388.0f6a15cf.chunk.js": "/Portfolio/static/js/388.0f6a15cf.chunk.js",
     "static/js/453.ace21015.chunk.js": "/Portfolio/static/js/453.ace21015.chunk.js",
     "static/media/indianMusicGuru.png": "/Portfolio/static/media/indianMusicGuru.d667f72133251c45093c.png",
     "static/media/artisteverse.png": "/Portfolio/static/media/artisteverse.735ad0cd319a7f8926f7.png",
@@ -26,12 +31,17 @@
     "static/media/main-kya-karu-fir-job-chhod-du-famous-indian-meme-templates.jpg": "/Portfolio/static/media/main-kya-karu-fir-job-chhod-du-famous-indian-meme-templates.f5a7bfca6cdb4712e36c.jpg",
     "static/media/Kohli-Surprised-meme-template.jpg": "/Portfolio/static/media/Kohli-Surprised-meme-template.52a1ec4c2b00e016c63a.jpg",
     "index.html": "/Portfolio/index.html",
-    "main.75b67539.css.map": "/Portfolio/static/css/main.75b67539.css.map",
-    "main.6fd3bfa1.js.map": "/Portfolio/static/js/main.6fd3bfa1.js.map",
+    "main.56e9c248.css.map": "/Portfolio/static/css/main.56e9c248.css.map",
+    "main.36767254.js.map": "/Portfolio/static/js/main.36767254.js.map",
+    "428.6fb4cf00.chunk.js.map": "/Portfolio/static/js/428.6fb4cf00.chunk.js.map",
+    "267.2549246c.chunk.js.map": "/Portfolio/static/js/267.2549246c.chunk.js.map",
+    "195.88951c19.chunk.js.map": "/Portfolio/static/js/195.88951c19.chunk.js.map",
+    "62.76a29db2.chunk.js.map": "/Portfolio/static/js/62.76a29db2.chunk.js.map",
+    "388.0f6a15cf.chunk.js.map": "/Portfolio/static/js/388.0f6a15cf.chunk.js.map",
     "453.ace21015.chunk.js.map": "/Portfolio/static/js/453.ace21015.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.75b67539.css",
-    "static/js/main.6fd3bfa1.js"
+    "static/css/main.56e9c248.css",
+    "static/js/main.36767254.js"
   ]
 }
