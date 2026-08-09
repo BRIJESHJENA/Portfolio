@@ -98,15 +98,18 @@ const MemeFloat: React.FC<MemeFloatProps> = ({ activeId }) => {
             </button>
 
             <button type="button" className="meme-float__trigger" onClick={openPopup}>
-              <motion.div
-                key={activeId}
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 0.28 }}
-              >
-                <span className="meme-float__label">{meme.situation}</span>
-                <img src={meme.image} alt={meme.alt} />
-              </motion.div>
+              <AnimatePresence mode="wait" initial={false}>
+                <motion.div
+                  key={activeId}
+                  initial={{ opacity: 0, y: 6 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -6 }}
+                  transition={{ duration: 0.22 }}
+                >
+                  <span className="meme-float__label">{meme.situation}</span>
+                  <img src={meme.image} alt={meme.alt} />
+                </motion.div>
+              </AnimatePresence>
             </button>
           </motion.aside>
         )}

@@ -4,7 +4,7 @@ import CloseRoundedIcon from "@mui/icons-material/CloseRounded";
 import DownloadRoundedIcon from "@mui/icons-material/DownloadRounded";
 import OpenInNewRoundedIcon from "@mui/icons-material/OpenInNewRounded";
 import PictureAsPdfOutlinedIcon from "@mui/icons-material/PictureAsPdfOutlined";
-import { resumes } from "../../data/contents.ts";
+import { usePortfolioData } from "../../context/PortfolioDataContext.tsx";
 
 interface ResumeDialogProps {
   open: boolean;
@@ -17,11 +17,13 @@ interface ResumeDialogProps {
 const viewerParams = "#toolbar=0&navpanes=0&scrollbar=0&view=FitH";
 
 const ResumeDialog: React.FC<ResumeDialogProps> = ({ open, onClose, initialId }) => {
-  const [activeId, setActiveId] = useState(initialId ?? resumes[0].id);
+  const { resumes } = usePortfolioData();
+  const list = resumes.data;
+  const [activeId, setActiveId] = useState(initialId ?? list[0]?.id);
 
   useEffect(() => {
-    if (open) setActiveId(initialId ?? resumes[0].id);
-  }, [open, initialId]);
+    if (open) setActiveId(initialId ?? list[0]?.id);
+  }, [open, initialId, list]);
 
   useEffect(() => {
     if (!open) return;
@@ -40,7 +42,9 @@ const ResumeDialog: React.FC<ResumeDialogProps> = ({ open, onClose, initialId })
     };
   }, [open, onClose]);
 
-  const active = resumes.find((item) => item.id === activeId) ?? resumes[0];
+  const active = list.find((item) => item.id === activeId) ?? list[0];
+
+  if (!active) return null;
 
   return (
     <AnimatePresence>
@@ -87,7 +91,7 @@ const ResumeDialog: React.FC<ResumeDialogProps> = ({ open, onClose, initialId })
             </div>
 
             <div className="resume-dialog__tabs" role="tablist" aria-label="Resume version">
-              {resumes.map((item) => (
+              {list.map((item) => (
                 <button
                   key={item.id}
                   type="button"
@@ -108,22 +112,17 @@ const ResumeDialog: React.FC<ResumeDialogProps> = ({ open, onClose, initialId })
                 key={active.id}
                 src={`${active.file}${viewerParams}`}
                 title={`${active.label} resume preview`}
+                loading="lazy"
               />
             </div>
 
-            {/* Most mobile browsers refuse to render PDFs inline, so give them a
-                usable path instead of an empty frame. */}
             <div className="resume-dialog__fallback">
               <PictureAsPdfOutlinedIcon sx={{ fontSize: 26 }} />
               <p>Inline preview isn’t supported here — open or download the PDF instead.</p>
             </div>
 
             <div className="resume-dialog__actions">
-              <a
-                href={active.file}
-                download={active.downloadName}
-                className="btn btn--primary"
-              >
+              <a href={active.file} download={active.downloadName} className="btn btn--primary">
                 <DownloadRoundedIcon sx={{ fontSize: 17 }} />
                 Download PDF
               </a>

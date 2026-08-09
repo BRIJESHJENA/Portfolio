@@ -1,19 +1,27 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { lazy, Suspense, useEffect, useMemo, useState } from "react";
 import { ThemeProvider, CssBaseline, createTheme } from "@mui/material";
 import KeyboardArrowUpRoundedIcon from "@mui/icons-material/KeyboardArrowUpRounded";
 import Navbar, { SECTION_IDS } from "./components/navbar/index.tsx";
 import MemeFloat from "./components/memes/MemeFloat.tsx";
 import useActiveSection from "./hooks/useActiveSection.ts";
 import BioSection from "./components/bio/index.tsx";
-import ExperienceSection from "./components/experience/index.tsx";
-import ProjectsSection from "./components/project/index.tsx";
-import SkillsSection from "./components/skills/index.tsx";
-import EducationSection from "./components/education/index.tsx";
-// import MemesSection from "./components/memes/index.tsx";
-import Contact from "./components/contact/index.tsx";
 import Footer from "./components/footer/index.tsx";
 import { ResumeDialogProvider } from "./components/resume/ResumeDialogProvider.tsx";
+import { PortfolioDataProvider } from "./context/PortfolioDataContext.tsx";
+import {
+  ContactSkeleton,
+  EducationSkeleton,
+  ExperienceSkeleton,
+  ProjectsSkeleton,
+  SkillsSkeleton,
+} from "./components/skeletons/index.tsx";
 import "./App.css";
+
+const ExperienceSection = lazy(() => import("./components/experience/index.tsx"));
+const ProjectsSection = lazy(() => import("./components/project/index.tsx"));
+const SkillsSection = lazy(() => import("./components/skills/index.tsx"));
+const EducationSection = lazy(() => import("./components/education/index.tsx"));
+const Contact = lazy(() => import("./components/contact/index.tsx"));
 
 const THEME_KEY = "portfolio-theme";
 
@@ -67,42 +75,53 @@ const App: React.FC = () => {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <ResumeDialogProvider>
-        <div className="app-root">
-          <div className="app-glow" aria-hidden />
+      <PortfolioDataProvider>
+        <ResumeDialogProvider>
+          <div className="app-root">
+            <div className="app-glow" aria-hidden />
 
-          <Navbar
-            isDarkMode={isDarkMode}
-            onToggleTheme={() => setIsDarkMode((prev) => !prev)}
-            activeId={activeId}
-          />
+            <Navbar
+              isDarkMode={isDarkMode}
+              onToggleTheme={() => setIsDarkMode((prev) => !prev)}
+              activeId={activeId}
+            />
 
-          <main>
-            <BioSection />
-            <ExperienceSection />
-            <ProjectsSection />
-            <SkillsSection />
-            <EducationSection />
-            {/* <MemesSection /> */}
-            <Contact />
-          </main>
+            <main>
+              <BioSection />
+              <Suspense fallback={<ExperienceSkeleton />}>
+                <ExperienceSection />
+              </Suspense>
+              <Suspense fallback={<ProjectsSkeleton />}>
+                <ProjectsSection />
+              </Suspense>
+              <Suspense fallback={<SkillsSkeleton />}>
+                <SkillsSection />
+              </Suspense>
+              <Suspense fallback={<EducationSkeleton />}>
+                <EducationSection />
+              </Suspense>
+              <Suspense fallback={<ContactSkeleton />}>
+                <Contact />
+              </Suspense>
+            </main>
 
-          <Footer />
+            <Footer />
 
-          <MemeFloat activeId={activeId} />
+            <MemeFloat activeId={activeId} />
 
-          {showToTop && (
-            <button
-              type="button"
-              className="to-top"
-              onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-              aria-label="Back to top"
-            >
-              <KeyboardArrowUpRoundedIcon sx={{ fontSize: 22 }} />
-            </button>
-          )}
-        </div>
-      </ResumeDialogProvider>
+            {showToTop && (
+              <button
+                type="button"
+                className="to-top"
+                onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+                aria-label="Back to top"
+              >
+                <KeyboardArrowUpRoundedIcon sx={{ fontSize: 22 }} />
+              </button>
+            )}
+          </div>
+        </ResumeDialogProvider>
+      </PortfolioDataProvider>
     </ThemeProvider>
   );
 };

@@ -5,19 +5,11 @@ import MailOutlineRoundedIcon from "@mui/icons-material/MailOutlineRounded";
 import DesignServicesOutlinedIcon from "@mui/icons-material/DesignServicesOutlined";
 import LayersOutlinedIcon from "@mui/icons-material/LayersOutlined";
 import SpeedOutlinedIcon from "@mui/icons-material/SpeedOutlined";
-import { Bio, experiences, projects, skills } from "../../data/contents.ts";
 import ScrollReveal from "../common/ScrollReveal.tsx";
 import mineAvatar from "../../assets/images/mine-avatar.png";
 import { useResumeDialog } from "../resume/ResumeDialogProvider.tsx";
-
-const technologyCount = skills.reduce((total, group) => total + group.skills.length, 0);
-
-const stats = [
-  { value: "3.7+", label: "Years experience" },
-  { value: String(projects.length), label: "Projects shipped" },
-  { value: String(experiences.length), label: "Companies" },
-  { value: `${Math.floor(technologyCount / 5) * 5}+`, label: "Technologies" },
-];
+import { usePortfolioData } from "../../context/PortfolioDataContext.tsx";
+import { BioSkeleton } from "../skeletons/index.tsx";
 
 const focusAreas = [
   {
@@ -37,8 +29,32 @@ const focusAreas = [
   },
 ];
 
+const shortLocation = (location: string | null) => {
+  if (!location) return "Bengaluru, IN";
+  if (/bangalore|bengaluru/i.test(location)) return "Bengaluru, IN";
+  return location;
+};
+
 const BioSection: React.FC = () => {
   const { openResume } = useResumeDialog();
+  const { profile, projects, experiences, skills } = usePortfolioData();
+
+  if (profile.isLoading) {
+    return <BioSkeleton />;
+  }
+
+  const bio = profile.data;
+  const technologyCount = skills.data.reduce((total, group) => total + group.skills.length, 0);
+  const stats = [
+    { value: "3.7+", label: "Years experience" },
+    { value: String(projects.data.length), label: "Projects shipped" },
+    { value: String(experiences.data.length), label: "Companies" },
+    { value: `${Math.floor(technologyCount / 5) * 5}+`, label: "Technologies" },
+  ];
+
+  const nameParts = bio.name.trim().split(/\s+/);
+  const firstName = (nameParts[0] || "").toLowerCase();
+  const restName = nameParts.slice(1).join(" ").toLowerCase();
 
   return (
     <section id="about" className="hero">
@@ -46,22 +62,20 @@ const BioSection: React.FC = () => {
         <div className="hero__grid">
           <ScrollReveal>
             <Typography component="h1" className="hero__title">
-              {Bio.name.split(" ")[0].toLowerCase()}{" "}
-              <span className="hero__title-accent">
-                {Bio.name.split(" ").slice(1).join(" ").toLowerCase()}
-              </span>
+              {firstName}{" "}
+              <span className="hero__title-accent">{restName}</span>
             </Typography>
 
             <Box className="hero__roles">
-              <span className="chip chip--mono">📍 Bengaluru, IN</span>
-              {Bio.roles.map((role) => (
+              <span className="chip chip--mono">📍 {shortLocation(bio.location)}</span>
+              {bio.roles.map((role) => (
                 <span key={role} className="chip chip--mono">
                   {role}
                 </span>
               ))}
             </Box>
 
-            <Typography className="hero__desc">{Bio.description}</Typography>
+            <Typography className="hero__desc">{bio.description}</Typography>
 
             <Box className="hero__cta">
               <a href="#contact" className="btn btn--primary">
@@ -72,31 +86,35 @@ const BioSection: React.FC = () => {
                 Resume
                 <ArrowOutwardRoundedIcon sx={{ fontSize: 15 }} />
               </button>
-              <a
-                href={Bio.github}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn btn--ghost"
-              >
-                GitHub
-                <ArrowOutwardRoundedIcon sx={{ fontSize: 15 }} />
-              </a>
-              <a
-                href={Bio.linkedin}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn btn--ghost"
-              >
-                LinkedIn
-                <ArrowOutwardRoundedIcon sx={{ fontSize: 15 }} />
-              </a>
+              {bio.github && (
+                <a
+                  href={bio.github}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn btn--ghost"
+                >
+                  GitHub
+                  <ArrowOutwardRoundedIcon sx={{ fontSize: 15 }} />
+                </a>
+              )}
+              {bio.linkedin && (
+                <a
+                  href={bio.linkedin}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn btn--ghost"
+                >
+                  LinkedIn
+                  <ArrowOutwardRoundedIcon sx={{ fontSize: 15 }} />
+                </a>
+              )}
             </Box>
           </ScrollReveal>
 
           <ScrollReveal direction="scale" delay={0.1}>
             <Box className="hero__portrait">
               <Box className="hero__portrait-frame">
-                <img src={mineAvatar} alt={Bio.name} />
+                <img src={mineAvatar} alt={bio.name} loading="eager" />
               </Box>
 
               <svg
@@ -106,14 +124,6 @@ const BioSection: React.FC = () => {
                 aria-label="Open to work"
               >
                 <defs>
-                  {/*
-                    Circle center: (50,50), stroke centerline r=45.5 so the 9-wide
-                    sash sits exactly on the photo edge.
-                    8:00 (240° from 12): x=10.59, y=72.75
-                    4:00 (120° from 12): x=89.41, y=72.75
-                    Symmetric about 6 o'clock, so startOffset 50% centers the text.
-                    sweep-flag=0 → counter-clockwise, i.e. around the bottom.
-                  */}
                   <path
                     id="hero-open-path"
                     d="M 10.59,72.75 A 45.5,47.5 0 0 0 89.41,72.75"
@@ -121,7 +131,6 @@ const BioSection: React.FC = () => {
                   />
                 </defs>
 
-                {/* Sash — painted on bottom edge of the photo */}
                 <path
                   className="hero__open-sash"
                   d="M 10.59,72.75 A 47,46 0 0 0 82.41,82.75"
@@ -129,14 +138,12 @@ const BioSection: React.FC = () => {
                   strokeLinecap="round"
                 />
 
-                {/* Text follows the arc centerline */}
                 <text className="hero__open-text">
                   <textPath href="#hero-open-path" startOffset="50%" textAnchor="middle">
                     OPEN TO WORK
                   </textPath>
                 </text>
 
-                {/* Caps */}
                 <circle className="hero__open-dot" cx="10.59" cy="72.75" r="2.1" />
                 <circle className="hero__open-dot" cx="82.41" cy="82.75" r="2.1" />
               </svg>

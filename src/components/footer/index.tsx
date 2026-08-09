@@ -1,21 +1,23 @@
 import React from "react";
-import { Bio } from "../../data/contents.ts";
 import { useResumeDialog } from "../resume/ResumeDialogProvider.tsx";
-
-const links = [
-  { label: "GitHub", href: Bio.github },
-  { label: "LinkedIn", href: Bio.linkedin },
-  { label: "Email", href: `mailto:${Bio.email}` },
-];
+import { usePortfolioData } from "../../context/PortfolioDataContext.tsx";
 
 const Footer: React.FC = () => {
   const { openResume } = useResumeDialog();
+  const { profile } = usePortfolioData();
+  const bio = profile.data;
+
+  const links = [
+    bio.github ? { label: "GitHub", href: bio.github } : null,
+    bio.linkedin ? { label: "LinkedIn", href: bio.linkedin } : null,
+    { label: "Email", href: `mailto:${bio.email}` },
+  ].filter(Boolean) as Array<{ label: string; href: string }>;
 
   return (
     <footer className="footer">
       <div className="container footer__inner">
         <span className="footer__note">
-          © {new Date().getFullYear()} {Bio.name.toLowerCase()} · Built with React &amp;
+          © {new Date().getFullYear()} {bio.name.toLowerCase()} · Built with React &amp;
           TypeScript
         </span>
         <nav className="footer__links" aria-label="Social links">

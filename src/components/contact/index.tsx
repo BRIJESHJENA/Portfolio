@@ -4,54 +4,104 @@ import MailOutlineRoundedIcon from "@mui/icons-material/MailOutlineRounded";
 import PhoneOutlinedIcon from "@mui/icons-material/PhoneOutlined";
 import PlaceOutlinedIcon from "@mui/icons-material/PlaceOutlined";
 import SendRoundedIcon from "@mui/icons-material/SendRounded";
-import { Bio } from "../../data/contents.ts";
 import { deliveredMeme, inviteMeme } from "../../data/memes.ts";
 import ScrollReveal from "../common/ScrollReveal.tsx";
 import SectionHeader from "../common/SectionHeader.tsx";
 import PageSection from "../common/PageSection.tsx";
+import { postContact } from "../../api/portfolio.ts";
+import { ApiError } from "../../api/client.ts";
+import { usePortfolioData } from "../../context/PortfolioDataContext.tsx";
+import { ContactSkeleton } from "../skeletons/index.tsx";
 
-const availability = ["Open to full-time", "Freelance", "Remote"];
+type FormStatus = "idle" | "submitting" | "success" | "error";
 
 const Contact: React.FC = () => {
+  const { profile } = usePortfolioData();
   const [form, setForm] = useState({ name: "", email: "", message: "" });
-  const [sent, setSent] = useState(false);
+  const [status, setStatus] = useState<FormStatus>("idle");
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
+
+  if (profile.isLoading) {
+    return <ContactSkeleton />;
+  }
+
+  const bio = profile.data;
+  const availability =
+    bio.availability?.length > 0
+      ? bio.availability
+      : ["Open to full-time", "Freelance", "Remote"];
 
   const update = (field: keyof typeof form) => (
     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
     setForm({ ...form, [field]: event.target.value });
-    setSent(false);
+    if (status !== "idle" && status !== "submitting") {
+      setStatus("idle");
+      setErrorMessage(null);
+    }
   };
 
-  // No backend here — hand the draft off to the visitor's mail client.
-  const handleSubmit = (event: React.FormEvent) => {
+  const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
-    const subject = encodeURIComponent(`Portfolio enquiry from ${form.name}`);
-    const body = encodeURIComponent(`${form.message}\n\n— ${form.name} (${form.email})`);
-    window.location.href = `mailto:${Bio.email}?subject=${subject}&body=${body}`;
-    setSent(true);
+    setStatus("submitting");
+    setErrorMessage(null);
+
+    try {
+      await postContact({
+        name: form.name.trim(),
+        email: form.email.trim(),
+        message: form.message.trim(),
+      });
+      setStatus("success");
+      setForm({ name: "", email: "", message: "" });
+    } catch (err) {
+      const message =
+        err instanceof ApiError
+          ? err.message
+          : "Couldn’t send your message. Please try again or email me directly.";
+      setErrorMessage(message);
+      setStatus("error");
+    }
   };
 
   const contactRows = [
     {
       icon: <MailOutlineRoundedIcon sx={{ fontSize: 17 }} />,
       label: "Email",
-      value: Bio.email,
-      href: `mailto:${Bio.email}`,
+      value: bio.email,
+      href: `mailto:${bio.email}`,
     },
-    {
-      icon: <PhoneOutlinedIcon sx={{ fontSize: 17 }} />,
-      label: "Phone",
-      value: String(Bio.phone),
-      href: `tel:${Bio.phone}`,
-    },
-    {
-      icon: <PlaceOutlinedIcon sx={{ fontSize: 17 }} />,
-      label: "Location",
-      value: Bio.location,
-      href: undefined,
-    },
-  ];
+    bio.phone
+      ? {
+          icon: <PhoneOutlinedIcon sx={{ fontSize: 17 }} />,
+          label: "Phone",
+          value: String(bio.phone),
+          href: `tel:${bio.phone}`,
+        }
+      : null,
+    bio.location
+      ? {
+          icon: <PlaceOutlinedIcon sx={{ fontSize: 17 }} />,
+          label: "Location",
+          value: bio.location,
+          href: undefined as string | undefined,
+        }
+      : null,
+  ].filter(Boolean) as Array<{
+    icon: React.ReactNode;
+    label: string;
+    value: string;
+    href?: string;
+  }>;
+
+  const statusText =
+    status === "submitting"
+      ? "Sending…"
+      : status === "success"
+        ? "Message sent — thanks for reaching out."
+        : status === "error"
+          ? errorMessage || "Something went wrong."
+          : "No spam, I promise.";
 
   return (
     <PageSection id="contact">
@@ -122,6 +172,8 @@ const Contact: React.FC = () => {
                   onChange={update("name")}
                   placeholder="Your name"
                   required
+                  maxLength={200}
+                  disabled={status === "submitting"}
                 />
               </Box>
               <Box className="field">
@@ -136,6 +188,8 @@ const Contact: React.FC = () => {
                   onChange={update("email")}
                   placeholder="you@example.com"
                   required
+                  maxLength={320}
+                  disabled={status === "submitting"}
                 />
               </Box>
             </Box>
@@ -151,23 +205,37 @@ const Contact: React.FC = () => {
                 onChange={update("message")}
                 placeholder="Tell me about the role or project…"
                 required
+                maxLength={5000}
+                disabled={status === "submitting"}
               />
             </Box>
 
             <Box sx={{ display: "flex", alignItems: "center", gap: 2, mt: 2.5, flexWrap: "wrap" }}>
-              <button type="submit" className="btn btn--primary">
+              <button
+                type="submit"
+                className="btn btn--primary"
+                disabled={status === "submitting"}
+              >
                 <SendRoundedIcon sx={{ fontSize: 15 }} />
-                Send message
+                {status === "submitting" ? "Sending…" : "Send message"}
               </button>
-              <span className={`form-status ${sent ? "form-status--sent" : ""}`.trim()}>
-                {sent ? "Opening your mail app — thanks for reaching out." : "No spam, I promise."}
+              <span
+                className={`form-status ${
+                  status === "success"
+                    ? "form-status--sent"
+                    : status === "error"
+                      ? "form-status--error"
+                      : ""
+                }`.trim()}
+              >
+                {statusText}
               </span>
             </Box>
 
-            {sent && (
+            {status === "success" && (
               <Box className="meme-inline meme-inline--wide" sx={{ mt: 2.5 }}>
                 <Typography className="meme-inline__label">{deliveredMeme.situation}</Typography>
-                <img src={deliveredMeme.image} alt={deliveredMeme.alt} />
+                <img src={deliveredMeme.image} alt={deliveredMeme.alt} loading="lazy" />
               </Box>
             )}
           </Box>
