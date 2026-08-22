@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/Portfolio/static/css/main.56e9c248.css",
-    "main.js": "/Portfolio/static/js/main.36767254.js",
-    "static/js/428.6fb4cf00.chunk.js": "/Portfolio/static/js/428.6fb4cf00.chunk.js",
-    "static/js/267.2549246c.chunk.js": "/Portfolio/static/js/267.2549246c.chunk.js",
-    "static/js/195.88951c19.chunk.js": "/Portfolio/static/js/195.88951c19.chunk.js",
-    "static/js/62.76a29db2.chunk.js": "/Portfolio/static/js/62.76a29db2.chunk.js",
-    "static/js/388.0f6a15cf.chunk.js": "/Portfolio/static/js/388.0f6a15cf.chunk.js",
-    "static/js/453.ace21015.chunk.js": "/Portfolio/static/js/453.ace21015.chunk.js",
+    "main.js": "/Portfolio/static/js/main.19759ec2.js",
+    "static/js/428.049ad589.chunk.js": "/Portfolio/static/js/428.049ad589.chunk.js",
+    "static/js/267.953069f3.chunk.js": "/Portfolio/static/js/267.953069f3.chunk.js",
+    "static/js/195.2e70c187.chunk.js": "/Portfolio/static/js/195.2e70c187.chunk.js",
+    "static/js/62.62608ad4.chunk.js": "/Portfolio/static/js/62.62608ad4.chunk.js",
+    "static/js/388.5e18ead2.chunk.js": "/Portfolio/static/js/388.5e18ead2.chunk.js",
+    "static/js/453.ac62fdbd.chunk.js": "/Portfolio/static/js/453.ac62fdbd.chunk.js",
     "static/media/indianMusicGuru.png": "/Portfolio/static/media/indianMusicGuru.d667f72133251c45093c.png",
     "static/media/artisteverse.png": "/Portfolio/static/media/artisteverse.735ad0cd319a7f8926f7.png",
     "static/media/portfolio.png": "/Portfolio/static/media/portfolio.7f3903645921e488a1b3.png",
@@ -32,16 +32,16 @@
     "static/media/Kohli-Surprised-meme-template.jpg": "/Portfolio/static/media/Kohli-Surprised-meme-template.52a1ec4c2b00e016c63a.jpg",
     "index.html": "/Portfolio/index.html",
     "main.56e9c248.css.map": "/Portfolio/static/css/main.56e9c248.css.map",
-    "main.36767254.js.map": "/Portfolio/static/js/main.36767254.js.map",
-    "428.6fb4cf00.chunk.js.map": "/Portfolio/static/js/428.6fb4cf00.chunk.js.map",
-    "267.2549246c.chunk.js.map": "/Portfolio/static/js/267.2549246c.chunk.js.map",
-    "195.88951c19.chunk.js.map": "/Portfolio/static/js/195.88951c19.chunk.js.map",
-    "62.76a29db2.chunk.js.map": "/Portfolio/static/js/62.76a29db2.chunk.js.map",
-    "388.0f6a15cf.chunk.js.map": "/Portfolio/static/js/388.0f6a15cf.chunk.js.map",
-    "453.ace21015.chunk.js.map": "/Portfolio/static/js/453.ace21015.chunk.js.map"
+    "main.19759ec2.js.map": "/Portfolio/static/js/main.19759ec2.js.map",
+    "428.049ad589.chunk.js.map": "/Portfolio/static/js/428.049ad589.chunk.js.map",
+    "267.953069f3.chunk.js.map": "/Portfolio/static/js/267.953069f3.chunk.js.map",
+    "195.2e70c187.chunk.js.map": "/Portfolio/static/js/195.2e70c187.chunk.js.map",
+    "62.62608ad4.chunk.js.map": "/Portfolio/static/js/62.62608ad4.chunk.js.map",
+    "388.5e18ead2.chunk.js.map": "/Portfolio/static/js/388.5e18ead2.chunk.js.map",
+    "453.ac62fdbd.chunk.js.map": "/Portfolio/static/js/453.ac62fdbd.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.56e9c248.css",
-    "static/js/main.36767254.js"
+    "static/js/main.19759ec2.js"
   ]
 }
