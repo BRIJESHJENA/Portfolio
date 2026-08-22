@@ -52,7 +52,7 @@ export const skills = [
   {
     title: "Languages & Markup",
     skills: [
-      { name: "JavaScript (ES6+)", image: devicon("javascript") },
+      { name: "JavaScript(ES6+)", image: devicon("javascript") },
       { name: "TypeScript", image: devicon("typescript") },
       { name: "HTML5", image: devicon("html5") },
       { name: "CSS3", image: devicon("css3") },
