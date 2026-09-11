@@ -6,14 +6,8 @@ import ScrollReveal from "../common/ScrollReveal.tsx";
 import SectionHeader from "../common/SectionHeader.tsx";
 import PageSection from "../common/PageSection.tsx";
 import { usePortfolioData } from "../../context/PortfolioDataContext.tsx";
-import { ProjectsSkeleton } from "../skeletons/index.tsx";
-
 const ProjectsSection: React.FC = () => {
   const { projects } = usePortfolioData();
-
-  if (projects.isLoading) {
-    return <ProjectsSkeleton />;
-  }
 
   return (
     <PageSection id="projects">

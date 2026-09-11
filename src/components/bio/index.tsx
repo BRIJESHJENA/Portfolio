@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useMemo } from "react";
+import { motion, useReducedMotion } from "framer-motion";
 import { Box, Typography } from "@mui/material";
 import ArrowOutwardRoundedIcon from "@mui/icons-material/ArrowOutwardRounded";
 import MailOutlineRoundedIcon from "@mui/icons-material/MailOutlineRounded";
@@ -6,11 +7,11 @@ import DesignServicesOutlinedIcon from "@mui/icons-material/DesignServicesOutlin
 import LayersOutlinedIcon from "@mui/icons-material/LayersOutlined";
 import SpeedOutlinedIcon from "@mui/icons-material/SpeedOutlined";
 import ScrollReveal from "../common/ScrollReveal.tsx";
+import HeroBackground from "../hero/HeroBackground.tsx";
+import ShowcaseTabs from "../showcase/ShowcaseTabs.tsx";
 import mineAvatar from "../../assets/images/mine-avatar.png";
 import { useResumeDialog } from "../resume/ResumeDialogProvider.tsx";
 import { usePortfolioData } from "../../context/PortfolioDataContext.tsx";
-import { BioSkeleton } from "../skeletons/index.tsx";
-
 const focusAreas = [
   {
     icon: <DesignServicesOutlinedIcon sx={{ fontSize: 20 }} />,
@@ -36,12 +37,25 @@ const shortLocation = (location: string | null) => {
 };
 
 const BioSection: React.FC = () => {
+  const reduceMotion = useReducedMotion();
   const { openResume } = useResumeDialog();
   const { profile, projects, experiences, skills } = usePortfolioData();
 
-  if (profile.isLoading) {
-    return <BioSkeleton />;
-  }
+  const showcaseTabs = useMemo(
+    () =>
+      projects.data
+        .filter((project): project is typeof project & { image: string } => Boolean(project.image))
+        .slice(0, 3)
+        .map((project) => ({
+          id: String(project.id),
+          label: project.title,
+          title: project.title,
+          description: project.description,
+          image: project.image,
+          href: project.webapp || undefined,
+        })),
+    [projects.data]
+  );
 
   const bio = profile.data;
   const technologyCount = skills.data.reduce((total, group) => total + group.skills.length, 0);
@@ -52,18 +66,40 @@ const BioSection: React.FC = () => {
     { value: `${Math.floor(technologyCount / 5) * 5}+`, label: "Technologies" },
   ];
 
-  const nameParts = bio.name.trim().split(/\s+/);
-  const firstName = (nameParts[0] || "").toLowerCase();
-  const restName = nameParts.slice(1).join(" ").toLowerCase();
+  const displayName = bio.name.toLowerCase();
 
   return (
     <section id="about" className="hero">
+      <HeroBackground />
       <div className="container">
         <div className="hero__grid">
           <ScrollReveal>
+            <motion.a
+              href="#projects"
+              className="hero__eyebrow-badge"
+              whileHover={{ y: -2, scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+              transition={{ type: "spring", stiffness: 420, damping: 28 }}
+            >
+              <motion.span
+                className="hero__eyebrow-dot"
+                aria-hidden
+                animate={{
+                  scale: [1, 1.35, 1],
+                  opacity: [1, 0.45, 1],
+                  boxShadow: [
+                    "0 0 10px rgba(198, 254, 30, 0.55)",
+                    "0 0 16px rgba(198, 254, 30, 0.9)",
+                    "0 0 10px rgba(198, 254, 30, 0.55)",
+                  ],
+                }}
+                transition={{ duration: 2.2, ease: "easeInOut", repeat: Infinity }}
+              />
+              Open to work · Frontend &amp; Full Stack
+            </motion.a>
+
             <Typography component="h1" className="hero__title">
-              {firstName}{" "}
-              <span className="hero__title-accent">{restName}</span>
+              {displayName}
             </Typography>
 
             <Box className="hero__roles">
@@ -117,11 +153,14 @@ const BioSection: React.FC = () => {
                 <img src={mineAvatar} alt={bio.name} loading="eager" />
               </Box>
 
-              <svg
+              <motion.svg
                 className="hero__open-badge"
                 viewBox="0 0 100 100"
                 role="img"
                 aria-label="Open to work"
+                initial={reduceMotion ? false : { opacity: 0, rotate: -4 }}
+                animate={{ opacity: 1, rotate: 0 }}
+                transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1], delay: 0.2 }}
               >
                 <defs>
                   <path
@@ -131,22 +170,79 @@ const BioSection: React.FC = () => {
                   />
                 </defs>
 
-                <path
+                <motion.path
                   className="hero__open-sash"
                   d="M 10.59,72.75 A 47,46 0 0 0 82.41,82.75"
                   fill="none"
                   strokeLinecap="round"
+                  initial={reduceMotion ? false : { pathLength: 0, opacity: 0 }}
+                  animate={
+                    reduceMotion
+                      ? { pathLength: 1, opacity: 1 }
+                      : { pathLength: 1, opacity: [0.7, 1, 0.7] }
+                  }
+                  transition={
+                    reduceMotion
+                      ? { duration: 0 }
+                      : {
+                          pathLength: { duration: 1.25, ease: [0.22, 1, 0.36, 1], delay: 0.35 },
+                          opacity: {
+                            duration: 2.8,
+                            ease: "easeInOut",
+                            repeat: Infinity,
+                            delay: 1.6,
+                          },
+                        }
+                  }
                 />
 
-                <text className="hero__open-text">
-                  <textPath href="#hero-open-path" startOffset="50%" textAnchor="middle">
-                    OPEN TO WORK
-                  </textPath>
-                </text>
+                <motion.g
+                  initial={reduceMotion ? false : { opacity: 0, y: 3 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1], delay: reduceMotion ? 0 : 1.1 }}
+                >
+                  <text className="hero__open-text">
+                    <textPath href="#hero-open-path" startOffset="50%" textAnchor="middle">
+                      OPEN TO WORK
+                    </textPath>
+                  </text>
+                </motion.g>
 
-                <circle className="hero__open-dot" cx="10.59" cy="72.75" r="2.1" />
-                <circle className="hero__open-dot" cx="82.41" cy="82.75" r="2.1" />
-              </svg>
+                <motion.circle
+                  className="hero__open-dot"
+                  cx="10.59"
+                  cy="72.75"
+                  r="2.1"
+                  animate={
+                    reduceMotion
+                      ? { opacity: 1 }
+                      : { opacity: [1, 0.3, 1], scale: [1, 1.35, 1] }
+                  }
+                  transition={
+                    reduceMotion
+                      ? { duration: 0 }
+                      : { duration: 2.2, ease: "easeInOut", repeat: Infinity, delay: 1.4 }
+                  }
+                  style={{ transformOrigin: "10.59px 72.75px", transformBox: "fill-box" }}
+                />
+                <motion.circle
+                  className="hero__open-dot"
+                  cx="82.41"
+                  cy="82.75"
+                  r="2.1"
+                  animate={
+                    reduceMotion
+                      ? { opacity: 1 }
+                      : { opacity: [1, 0.3, 1], scale: [1, 1.35, 1] }
+                  }
+                  transition={
+                    reduceMotion
+                      ? { duration: 0 }
+                      : { duration: 2.2, ease: "easeInOut", repeat: Infinity, delay: 2.5 }
+                  }
+                  style={{ transformOrigin: "82.41px 82.75px", transformBox: "fill-box" }}
+                />
+              </motion.svg>
             </Box>
           </ScrollReveal>
         </div>
@@ -161,6 +257,12 @@ const BioSection: React.FC = () => {
             ))}
           </Box>
         </ScrollReveal>
+
+        {showcaseTabs.length > 0 && (
+          <ScrollReveal delay={0.2}>
+            <ShowcaseTabs tabs={showcaseTabs} />
+          </ScrollReveal>
+        )}
 
         <Box sx={{ mt: { xs: 5, md: 8 } }}>
           <ScrollReveal>

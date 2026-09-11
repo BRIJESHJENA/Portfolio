@@ -72,3 +72,12 @@ export interface HealthResponse {
   ok: boolean;
   service: string;
 }
+
+export interface PortfolioBundle {
+  profile: Profile;
+  resumes: Resume[];
+  skills: SkillCategory[];
+  experiences: Experience[];
+  education: Education[];
+  projects: Project[];
+}

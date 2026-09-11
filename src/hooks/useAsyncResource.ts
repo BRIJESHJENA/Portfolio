@@ -6,7 +6,10 @@ export interface AsyncResource<T> {
   data: T;
   status: AsyncStatus;
   error: string | null;
+  /** True only before any data (including cache/fallback) is shown. */
   isLoading: boolean;
+  /** True while a background refresh is in flight after initial render. */
+  isRefreshing: boolean;
   isError: boolean;
   reload: () => void;
 }
@@ -18,10 +21,11 @@ export interface AsyncResource<T> {
 export function useAsyncResource<T>(
   loader: () => Promise<T>,
   fallback: T,
-  enabled = true
+  enabled = true,
+  initialData?: T | null
 ): AsyncResource<T> {
-  const [data, setData] = useState<T>(fallback);
-  const [status, setStatus] = useState<AsyncStatus>(enabled ? "loading" : "idle");
+  const [data, setData] = useState<T>(initialData ?? fallback);
+  const [status, setStatus] = useState<AsyncStatus>(!enabled ? "idle" : "loading");
   const [error, setError] = useState<string | null>(null);
   const [tick, setTick] = useState(0);
 
@@ -54,7 +58,9 @@ export function useAsyncResource<T>(
     data,
     status,
     error,
-    isLoading: status === "loading",
+    // Fallback/cache data is shown immediately — never block the UI on fetch.
+    isLoading: false,
+    isRefreshing: status === "loading",
     isError: status === "error",
     reload: () => setTick((n) => n + 1),
   };

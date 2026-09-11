@@ -11,8 +11,6 @@ import PageSection from "../common/PageSection.tsx";
 import { postContact } from "../../api/portfolio.ts";
 import { ApiError } from "../../api/client.ts";
 import { usePortfolioData } from "../../context/PortfolioDataContext.tsx";
-import { ContactSkeleton } from "../skeletons/index.tsx";
-
 type FormStatus = "idle" | "submitting" | "success" | "error";
 
 const Contact: React.FC = () => {
@@ -20,10 +18,6 @@ const Contact: React.FC = () => {
   const [form, setForm] = useState({ name: "", email: "", message: "" });
   const [status, setStatus] = useState<FormStatus>("idle");
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
-
-  if (profile.isLoading) {
-    return <ContactSkeleton />;
-  }
 
   const bio = profile.data;
   const availability =

@@ -1,10 +1,12 @@
 import { apiRequest } from "./client";
+import { loadPortfolioDeduped } from "./portfolioCache";
 import type {
   ContactPayload,
   ContactResponse,
   Education,
   Experience,
   HealthResponse,
+  PortfolioBundle,
   Profile,
   Project,
   Resume,
@@ -12,6 +14,9 @@ import type {
 } from "./types";
 
 export const getHealth = () => apiRequest<HealthResponse>("/api/health");
+
+export const getPortfolioBundle = () =>
+  loadPortfolioDeduped(() => apiRequest<PortfolioBundle>("/api/portfolio"));
 
 export const getProfile = () => apiRequest<Profile>("/api/profile");
 

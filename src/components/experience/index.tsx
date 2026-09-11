@@ -4,16 +4,10 @@ import ScrollReveal from "../common/ScrollReveal.tsx";
 import SectionHeader from "../common/SectionHeader.tsx";
 import PageSection from "../common/PageSection.tsx";
 import { usePortfolioData } from "../../context/PortfolioDataContext.tsx";
-import { ExperienceSkeleton } from "../skeletons/index.tsx";
-
 const stripBullet = (line: string) => line.replace(/^[•\-\s]+/, "");
 
 const ExperienceSection: React.FC = () => {
   const { experiences } = usePortfolioData();
-
-  if (experiences.isLoading) {
-    return <ExperienceSkeleton />;
-  }
 
   return (
     <PageSection id="experience">

@@ -22,7 +22,11 @@ const SectionHeader: React.FC<SectionHeaderProps> = ({ label, title, subtitle, a
       }}
     >
       <Box>
-        {label && <Typography className="eyebrow">{label}</Typography>}
+        {label && (
+          <Typography className="eyebrow" sx={{ color: "var(--text-muted) !important" }}>
+            {label}
+          </Typography>
+        )}
         <Typography component="h2" className="section-title" sx={{ mt: label ? 1.5 : 0 }}>
           {title}
         </Typography>

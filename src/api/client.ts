@@ -1,5 +1,7 @@
 const DEFAULT_API_BASE = "http://localhost:4000";
 
+console.log(process.env.REACT_APP_API_URL);
+
 export const API_BASE = (process.env.REACT_APP_API_URL || DEFAULT_API_BASE).replace(
   /\/$/,
   ""

@@ -7,17 +7,12 @@ import {
   resumes as staticResumes,
   skills as staticSkills,
 } from "../data/contents.ts";
-import {
-  getEducation,
-  getExperiences,
-  getProfile,
-  getProjects,
-  getResumes,
-  getSkills,
-} from "../api/portfolio.ts";
+import { getPortfolioBundle } from "../api/portfolio.ts";
+import { readPortfolioCache } from "../api/portfolioCache.ts";
 import type {
   Education,
   Experience,
+  PortfolioBundle,
   Profile,
   Project,
   Resume,
@@ -55,6 +50,15 @@ const projectFallback: Project[] = staticProjects.map((p) => ({
   webapp: p.webapp,
 }));
 
+const bundleFallback: PortfolioBundle = {
+  profile: profileFallback,
+  resumes: resumeFallback,
+  skills: staticSkills,
+  experiences: staticExperiences,
+  education: staticEducation,
+  projects: projectFallback,
+};
+
 interface PortfolioDataValue {
   profile: AsyncResource<Profile>;
   resumes: AsyncResource<Resume[]>;
@@ -66,17 +70,36 @@ interface PortfolioDataValue {
 
 const PortfolioDataContext = createContext<PortfolioDataValue | null>(null);
 
-export const PortfolioDataProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const profile = useAsyncResource(getProfile, profileFallback);
-  const resumes = useAsyncResource(getResumes, resumeFallback);
-  const skills = useAsyncResource(getSkills, staticSkills);
-  const experiences = useAsyncResource(getExperiences, staticExperiences);
-  const education = useAsyncResource(getEducation, staticEducation);
-  const projects = useAsyncResource(getProjects, projectFallback);
+function sliceResource<T>(
+  bundle: AsyncResource<PortfolioBundle>,
+  pick: (data: PortfolioBundle) => T
+): AsyncResource<T> {
+  return {
+    data: pick(bundle.data),
+    status: bundle.status,
+    error: bundle.error,
+    isLoading: bundle.isLoading,
+    isRefreshing: bundle.isRefreshing,
+    isError: bundle.isError,
+    reload: bundle.reload,
+  };
+}
 
-  const value = useMemo(
-    () => ({ profile, resumes, skills, experiences, education, projects }),
-    [profile, resumes, skills, experiences, education, projects]
+const cachedBundle = readPortfolioCache();
+
+export const PortfolioDataProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+  const bundle = useAsyncResource(getPortfolioBundle, bundleFallback, true, cachedBundle);
+
+  const value = useMemo<PortfolioDataValue>(
+    () => ({
+      profile: sliceResource(bundle, (b) => b.profile),
+      resumes: sliceResource(bundle, (b) => b.resumes),
+      skills: sliceResource(bundle, (b) => b.skills),
+      experiences: sliceResource(bundle, (b) => b.experiences),
+      education: sliceResource(bundle, (b) => b.education),
+      projects: sliceResource(bundle, (b) => b.projects),
+    }),
+    [bundle]
   );
 
   return (

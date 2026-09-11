@@ -29,7 +29,7 @@ const getInitialTheme = () => {
   if (typeof window === "undefined") return true;
   const stored = window.localStorage.getItem(THEME_KEY);
   if (stored) return stored === "dark";
-  return window.matchMedia("(prefers-color-scheme: dark)").matches;
+  return true;
 };
 
 const App: React.FC = () => {
@@ -53,18 +53,20 @@ const App: React.FC = () => {
       createTheme({
         palette: {
           mode: isDarkMode ? "dark" : "light",
-          primary: { main: isDarkMode ? "#8b8bf5" : "#6366f1" },
+          primary: { main: isDarkMode ? "#c6fe1e" : "#004f32" },
           background: {
-            default: isDarkMode ? "#09090b" : "#ffffff",
-            paper: isDarkMode ? "#111114" : "#ffffff",
+            default: isDarkMode ? "#0d0d0d" : "#ffffff",
+            paper: isDarkMode ? "#1a1a1a" : "#ffffff",
           },
           text: {
-            primary: isDarkMode ? "#fafafa" : "#0b0b0d",
-            secondary: isDarkMode ? "#a1a1aa" : "#6b7280",
+            primary: isDarkMode ? "#f5f5f5" : "#00160d",
+            secondary: isDarkMode ? "#a3a3a3" : "#666666",
           },
         },
         typography: {
           fontFamily: '"Inter", "Segoe UI", sans-serif',
+          h1: { fontFamily: '"Bricolage Grotesque", "Inter", sans-serif', fontWeight: 500 },
+          h2: { fontFamily: '"Bricolage Grotesque", "Inter", sans-serif', fontWeight: 500 },
         },
         shape: { borderRadius: 12 },
         breakpoints: { values: { xs: 0, sm: 576, md: 768, lg: 992, xl: 1200 } },
@@ -86,6 +88,7 @@ const App: React.FC = () => {
               activeId={activeId}
             />
 
+            <div className="page-shell">
             <main>
               <BioSection />
               <Suspense fallback={<ExperienceSkeleton />}>
@@ -106,6 +109,7 @@ const App: React.FC = () => {
             </main>
 
             <Footer />
+            </div>
 
             <MemeFloat activeId={activeId} />
 

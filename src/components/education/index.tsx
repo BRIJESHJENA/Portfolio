@@ -4,14 +4,8 @@ import ScrollReveal from "../common/ScrollReveal.tsx";
 import SectionHeader from "../common/SectionHeader.tsx";
 import PageSection from "../common/PageSection.tsx";
 import { usePortfolioData } from "../../context/PortfolioDataContext.tsx";
-import { EducationSkeleton } from "../skeletons/index.tsx";
-
 const EducationSection: React.FC = () => {
   const { education } = usePortfolioData();
-
-  if (education.isLoading) {
-    return <EducationSkeleton />;
-  }
 
   return (
     <PageSection id="education">

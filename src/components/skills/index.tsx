@@ -5,14 +5,8 @@ import SectionHeader from "../common/SectionHeader.tsx";
 import PageSection from "../common/PageSection.tsx";
 import SkillIcon from "./SkillIcon.tsx";
 import { usePortfolioData } from "../../context/PortfolioDataContext.tsx";
-import { SkillsSkeleton } from "../skeletons/index.tsx";
-
 const SkillsSection: React.FC = () => {
   const { skills } = usePortfolioData();
-
-  if (skills.isLoading) {
-    return <SkillsSkeleton />;
-  }
 
   return (
     <PageSection id="skills">
